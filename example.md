@@ -13,6 +13,7 @@ Arca:
     - What's this code thing? -> code
 
 # who
+[In this section, Lao and Ada explain who they are]
 set asked-who
 Lao: I am Lao - the Oracle. I am one of the few creatures left who practices the ancient art of coding. This is my apprentice, Ada.
 Ada: Hey
@@ -51,3 +52,15 @@ Arca:
 Lao: Tremendous focus is required! You must feel the code in everything around you.
 exec editPrompt()
 Lao: One step at a time, without letting anxiety cloud progress. Deep down in our consciousness, we need to ponder the eternal question - am I the egg, or are you the egg? Do eggs really exist? You probably wouldn’t understand. The Great Gastropod of 1992 said ‘If you chase two molluscs, one will escape’ He was right, unless you happen to be a two headed electric eel.
+
+branch:
+- (if arca.code-opinion is 'eager') Arca:
+    * Ooh look
+        Lao: NO LOOKING
+    * A choice inna branch
+        Lao: NO BRANCHING
+    * will it work?
+        Lao: NO WORKING
+- (if arca.code-opinion is 'difficult') Lao: You think code is difficult
+- (if arca.code-opinion is 'boring') Lao: Code isn't boring!
+- (default) Lao: No-one cares what you think of code

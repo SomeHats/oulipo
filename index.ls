@@ -21,16 +21,20 @@ class Parser
 
     while @current-indent! >= base-indent and @pos < @source.length
       switch
-      | @ch!.match /[A-Z]/ => lines[*] = @parse-line-or-choice!
-      | @ch!.match /[a-z]/ => lines[*] = @parse-instruction!
       | @ch! is \# and allow-sections =>
         if return-on-section then return lines else lines[*] = @parse-section!
       | @ch! is \\n => @next!
-      | otherwise => throw "[parse-dialogue] Unexpected '#{@ch!}"
+      | otherwise => lines[*] = @parse-statement!
 
       @consume /\s/
 
     lines
+
+  parse-statement: ->
+    | @ch!.match /[A-Z]/ => @parse-line-or-choice!
+    | @ch!.match /[a-z]/ => @parse-instruction!
+    | @ch! is \[ => @parse-note!
+    | otherwise => throw "[parse-dialogue] Unexpected '#{@ch!}"
 
   # Complex structures to parse:
   parse-line-or-choice: ->
@@ -41,8 +45,8 @@ class Parser
       choices = @parse-choice-list!
       {type: \choice, name, choices}
     else
-      string = @parse-string!
-      {type: \line, name, string}
+      content = @parse-string!
+      {type: \line, name, content}
 
   parse-instruction: ->
     name = @parse-identifier!
@@ -51,6 +55,7 @@ class Parser
     | \set => @parse-instruction-set!
     | \go, \goto => @parse-instruction-go!
     | \exec => @parse-instruction-exec!
+    | \branch => @parse-instruction-branch!
     | otherwise => throw "Unknown command '#{name}'. Character names for lines of dialogue must start with a capital letter"
 
   parse-section: ->
@@ -59,6 +64,20 @@ class Parser
     name = @parse-identifier!
     lines = @parse-dialogue 0, allow-sections: true, return-on-section: true
     {type: \section, name, lines}
+
+  parse-note: ->
+    depth = 1
+    note = ''
+    while depth > 0
+      switch @next!
+      | \[ => depth++
+      | \] => depth--
+
+      note += @ch!
+
+    @next!
+    note .= replace /]$/ '' .trim!
+    {type: \note, contents: note}
 
   # Nested choices:
   parse-choice-list: ->
@@ -74,8 +93,12 @@ class Parser
     choices
 
   parse-choice: ->
+    if @ch! is \(
+      condition = @parse-condition!
+      @consume ' '
+
     if @ch! in [\' \"]
-      string = @parse-quoted-string!
+      content = @parse-quoted-string!
       @consume ' '
       if @ch! is '-' and @peek! is '>'
         @next 2
@@ -88,7 +111,7 @@ class Parser
           next = @parse-dialogue!
         else throw "[parse-choice] Unexpected '#{@ch!}', expected newline"
     else
-      string = ''
+      content = ''
       loop
         if @ch! is '-' and @peek! is '>'
           @next 2
@@ -100,10 +123,39 @@ class Parser
           next = @parse-dialogue!
           break
         else
-          string += @ch!
+          content += @ch!
           @next!
 
-    {string, next}
+    {content, next, condition}
+
+  parse-condition: ->
+    @next! # skip over opening '('
+    type = @parse-identifier!
+    if type not in <[if unless default]> then throw "Condition type must be if or unless, not '#type'. If you are trying to start a line with a bracket, wrap the line in speach marks."
+    value = {
+      if: true
+      unless: false
+      default: {default: true}
+    }[type]
+
+    depth = 1
+    expression = ''
+    while depth > 0 and @pos < @source.length
+      switch @ch!
+      case \( => depth += 1
+      case \) => depth -= 1
+      case \', \" =>
+        quote = @ch!
+        expression += quote + @parse-quoted-string!
+        @prev! # Skip back so we don't miss the character immediately following the quote
+
+      expression += @ch!
+      @next!
+
+    @next!
+    expression .= replace /\)$/ '' .trim!
+    if type is \default and expression isnt '' then throw "Default condition should have no expression"
+    {expression, is: value}
 
   # Instructions/commands
   parse-instruction-set: ->
@@ -121,6 +173,25 @@ class Parser
 
   parse-instruction-exec: ->
     {type: \exec, js: @parse-string!}
+
+  parse-instruction-branch: ->
+    if @ch! is \: then @next!
+    @consume /\s/
+
+    base-indent = @current-indent!
+    branches = []
+    while @current-indent! >= base-indent and @ch!.match /[\-\*\+]/ and @pos < @source.length
+      @next!
+      @consume ' '
+      if @ch! isnt '(' then throw "[parse-instruction-branch] Unexpected '#{@ch!}': branch option should start with a condition"
+      condition = @parse-condition!
+      @consume ' '
+      statement = @parse-statement!
+      statement <<< {condition}
+      branches[*] = statement
+      @consume /\s/
+
+    {type: \branch, branches}
 
   # Literal values etc.
   parse-name: ->
@@ -160,7 +231,6 @@ class Parser
       if @pos > @source.length then throw "Unterminated string: #{string}"
       if @ch! is \\
         @next!
-        @log-pos 'Quoted character'
       string += @ch!
 
     @next!
@@ -174,6 +244,7 @@ class Parser
   parse-identifier: ->
     @consume /[a-zA-Z0-9\.\-\_]/
 
+  # Utilities:
   start: ->
     @pos = 0
 
@@ -187,6 +258,7 @@ class Parser
   peek: (n = 1) -> @source[@pos + n]
 
   next: (n = 1) -> @source[@pos += n]
+  prev: (n = 1) -> @source[@pos -= n]
 
   consume: (regex) ->
     consumed = ''
@@ -227,7 +299,7 @@ class Parser
 
   log-pos: (msg = '', at = @pos) ->
     [line, char] = @line-ch at
-    console.log "\nAt line #line, character #char: '#{@ch!}'"
+    console.log "\nAt line #line, character #{char + 1}: '#{@ch!}'"
     console.log (@source.split \\n)[line - 1]
     console.log "#{replicate char, '~' .join ''}^", msg
 
