@@ -1,0 +1,21 @@
+{
+  "name": "Oulipo",
+  "main": "index.js",
+  "version": "0.0.0",
+  "authors": [
+    "Joe Dytrych <j@dytry.ch>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootswatch": "~3.3.5",
+    "codemirror": "~5.3.0"
+  }
+}

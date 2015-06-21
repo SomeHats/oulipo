@@ -1,0 +1,11 @@
+body {
+  padding-top: 64px;
+}
+
+.CodeMirror {
+  height: auto;
+}
+
+.navbar-header.pull-right {
+  margin-right: 15px;
+}
