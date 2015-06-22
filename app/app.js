@@ -3,6 +3,7 @@ var remote = require('remote'),
     dialog = remote.require('dialog'),
     fs = require('fs'),
     parse = remote.require('./app/parser.js'),
+    astUtils = remote.require('./lib/ast'),
     app = remote.require('app');
 
 var originalFile = null,
@@ -114,6 +115,24 @@ function saveFile(as) {
   fs.writeFileSync(fileName, originalFile, {encoding: 'utf-8'});
   app.addRecentDocument(fileName);
   change();
+}
+
+function exportFile() {
+  var file = dialog.showSaveDialog(browserWindow, {
+    title: 'Export',
+    filters: [{ name: 'JSON', extensions: ['json', 'js'] }]
+  });
+
+  if (!file) return;
+  var ast = parse(codemirror.getValue());
+  if (ast.error) {
+    console.log(ast.error);
+    $('#error-modal-content').text(ast.error);
+    $('#error-modal').modal('show');
+    return;
+  }
+
+  fs.writeFileSync(file, JSON.stringify(astUtils.flatten(astUtils.prepare(ast))), {encoding: 'utf-8'});
 }
 
 function runScript() {

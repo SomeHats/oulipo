@@ -76,9 +76,9 @@ set-menu = ->
           accelerator: \Command+Shift+S
           click: -> exec 'saveFile(true)'
         * type: \separator
-        # * label: 'Export'
-        #   accelerator: \Command+E
-        #   click: -> console.log \export
+        * label: 'Export'
+          accelerator: \Command+E
+          click: -> exec 'exportFile()'
         * label: 'Run'
           accelerator: \Command+R
           click: -> exec 'runScript()'
