@@ -67,7 +67,7 @@ body {
   font-weight: bold;
 }
 
-.message-set {
+.message-set, .message-branch {
   text-align: center;
   font-weight: 100;
 }

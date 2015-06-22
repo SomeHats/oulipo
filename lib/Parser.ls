@@ -1,5 +1,5 @@
 require! {
-  'prelude-ls': {last, empty, replicate}
+  'prelude-ls': {last, empty, replicate, tail, find-index, take, drop}
   'fs'
 }
 
@@ -133,23 +133,11 @@ module.exports = class Parser
       default: {default: true}
     }[type]
 
-    depth = 1
-    expression = ''
-    while depth > 0 and @pos < @source.length
-      switch @ch!
-      case \( => depth += 1
-      case \) => depth -= 1
-      case \', \" =>
-        quote = @ch!
-        expression += quote + @parse-quoted-string!
-        @prev! # Skip back so we don't miss the character immediately following the quote
-
-      expression += @ch!
-      @next!
+    expression = @parse-expression 1
+    console.log 'EXPRESSION' JSON.stringify expression, null, 2
 
     @next!
-    expression .= replace /\)$/ '' .trim!
-    if type is \default and expression isnt '' then throw "Default condition should have no expression"
+    if type is \default and expression.exp.length isnt 0 then throw "Default condition should have no expression"
     {expression, is: value}
 
   # Instructions/commands
@@ -189,6 +177,54 @@ module.exports = class Parser
     {type: \branch, branches}
 
   # Literal values etc.
+  parse-expression: ->
+    precedence = <[& | == != < > <= >= + - * /]>
+    split-on = (op, obj) ->
+      if typeof! obj is \Array
+        if obj.length is 1 then return obj.0
+        i = find-index ( .op is op ), obj
+        unless i? then return obj
+        return {
+          type: \operator
+          op: op
+          left: split-on op, (take i, obj)
+          right: split-on op, (drop i + 1, obj)
+        }
+      else if typeof obj is \object
+        if obj.left then obj.left = split-on op, obj.left
+        if obj.right then obj.right = split-on op, obj.right
+        if obj.exp then obj.exp = split-on op, obj.exp
+        return obj
+      else throw new TypeError "Cannot split on #{obj}"
+
+    tokens = []
+    while @pos < @source.length
+      @consume ' '
+      if @ch! is \(
+        @next!
+        tokens[*] = @parse-expression!
+      else if @ch! is \)
+        @next!
+        break
+      else
+        tokens[*] = @parse-exp-item!
+
+    for token in tokens when token.type is \operator and token.op in <[is isnt and or]>
+      token.op = {is: '==', isnt: '!=', and: '&', or: '|'}[token.op]
+
+    exp = tokens
+    for op in precedence => exp = split-on op, exp
+
+    {type: \expression, exp}
+
+  parse-exp-item: ->
+    | @match /^(&|\||==|!=|<|>|<=|>=|\+|\-|\*|\/|isnt|is|and|or)/, true => type: \operator, op: that
+    | @match /^\-?[0-9]+(\.[0-9]+)?/, true => type: \number, val: that
+    | @match /^(true|false)/, true => type: \boolean, val: (if that is \true then true else false)
+    | @match /^[a-zA-Z_\-\.]+/, true => type: \identifier, val: that
+    | @ch! in [\' \"] => type: \string, val: @parse-quoted-string!
+    | otherwise => throw "[parse-exp-item] Unexpected '#{@ch!}'"
+
   parse-name: ->
     name = ''
     loop
@@ -255,6 +291,14 @@ module.exports = class Parser
 
   next: (n = 1) -> @source[@pos += n]
   prev: (n = 1) -> @source[@pos -= n]
+
+  match: (regex, consume = true) ->
+    m = @source.slice @pos .match regex
+    if m and consume
+      m = m.0
+      @next m.length
+      m
+    else m
 
   consume: (regex) ->
     consumed = ''

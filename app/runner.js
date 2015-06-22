@@ -19,6 +19,9 @@ var formatters = {
   set: function(node, extras) {
     return 'set ' + node.variable + ' ' + node.op + ' ' + JSON.stringify(node.value) +
       ' (' + JSON.stringify(extras.before) + ' &rarr; ' + JSON.stringify(extras.after) + ')';
+  },
+  branch: function(node) {
+    return 'branch &rarr; ' + node.idx;
   }
 };
 
@@ -86,7 +89,24 @@ var processors = {
     return node.next;
   },
   branch: function(node) {
-    console.log(node);
+    var i, l, def;
+    for (i = 0, l = node.branches.length; i < l; i++) {
+      if (node.branches[i].condition.is.default) {
+        def = node.branches[i];
+        continue;
+      }
+      if (evalCondition(node.branches[i].condition)) {
+        addMessage({type: 'branch', idx: i + 1});
+        return node.branches[i]._id;
+      }
+    }
+
+    if (def) {
+      addMessage({type: 'branch', idx: 'default'});
+      return def._id;
+    } else {
+      throw new Error("No default and no valid condition in branch!");
+    }
   }
 };
 
@@ -99,8 +119,40 @@ function updateScroll() {
 }
 
 function evalCondition(condition) {
-  return !!state[condition.expression] === condition.is;
+  return !!evalExpression(condition.expression) === condition.is;
 }
+
+function evalExpression(exp) {
+  switch (exp.type) {
+    case 'expression':
+      return evalExpression(exp.exp);
+    case 'operator':
+      return evalOperation[exp.op](evalExpression(exp.left), evalExpression(exp.right));
+    case 'identifier':
+      return state[exp.val];
+    case 'number':
+    case 'boolean':
+    case 'string':
+      return exp.val;
+    default:
+      throw new TypeError("Bad type of expression: " + exp.type);
+  }
+}
+
+var evalOperation = {
+  '&':  function(left, right) { return left && right; },
+  '|':  function(left, right) { return left || right; },
+  '==': function(left, right) { return left === right; },
+  '!=': function(left, right) { return left !== right; },
+  '<':  function(left, right) { return left < right; },
+  '>':  function(left, right) { return left > right; },
+  '<=': function(left, right) { return left <= right; },
+  '>=': function(left, right) { return left <= right; },
+  '+':  function(left, right) { return left + right; },
+  '-':  function(left, right) { return left - right; },
+  '*':  function(left, right) { return left * right; },
+  '/':  function(left, right) { return left / right; },
+};
 
 var state = {},
     nodes;

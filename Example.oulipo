@@ -54,7 +54,7 @@ exec editPrompt()
 Lao: One step at a time, without letting anxiety cloud progress. Deep down in our consciousness, we need to ponder the eternal question - am I the egg, or are you the egg? Do eggs really exist? You probably wouldn’t understand. The Great Gastropod of 1992 said ‘If you chase two molluscs, one will escape’ He was right, unless you happen to be a two headed electric eel.
 
 branch:
-- (if arca.code-opinion is 'eager') Arca:
+- (if arca.code-opinion is 'eager' and (thing is true)) Arca:
     * Ooh look
         Lao: NO LOOKING
     * A choice inna branch
