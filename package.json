@@ -13,5 +13,8 @@
     "livescript": "^1.4.0",
     "node-uuid": "^1.4.3",
     "prelude-ls": "^1.1.2"
+  },
+  "devDependencies": {
+    "electron-packager": "^4.1.3"
   }
 }

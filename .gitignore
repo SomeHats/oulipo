@@ -1,3 +1,5 @@
 node_modules
 *.swp
 app/vendor
+dist
+.build
