@@ -394,7 +394,6 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
 
       var f = state.f;
       var res = state.f(s, state);
-      console.log('"' + s.current() + '" -> ' + res, f);
       return res;
     }
   };

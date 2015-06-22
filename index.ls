@@ -5,18 +5,32 @@ require! {
 }
 
 main-window = null
+ready = false
+to-open = null
 
 app.on \window-all-closed -> app.quit!
 
+app.on \open-file (e, file) ->
+  if ready
+    exec "openFile(#{JSON.stringify file})"
+  else to-open := file
+
 app.on \ready ->
   main-window := new BrowserWindow width: 1024, height: 768, 'min-width': 780
-  main-window.load-url "file://#{__dirname}/app/index.html"
   # main-window.open-dev-tools!
   main-window.on \closed -> main-window := null
+  main-window.web-contents.on \did-finish-load ->
+    ready := true
+    if to-open
+      exec "openFile(#{JSON.stringify to-open})"
+      to-open := null
 
+  main-window.load-url "file://#{__dirname}/app/index.html"
   set-menu!
 
-exec = (js) -> main-window.web-contents.execute-java-script js
+exec = (js) ->
+  console.log 'exec' js
+  main-window.web-contents.execute-java-script js
 
 set-menu = ->
   menu = Menu.build-from-template [

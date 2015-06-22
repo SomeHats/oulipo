@@ -1,7 +1,9 @@
 var remote = require('remote'),
     browserWindow = remote.getCurrentWindow(),
     dialog = remote.require('dialog'),
-    fs = require('fs');
+    fs = require('fs'),
+    parse = remote.require('./app/parser.js'),
+    app = remote.require('app');
 
 var originalFile = null,
     isEdited = false,
@@ -9,18 +11,21 @@ var originalFile = null,
 
 var codemirror = CodeMirror(document.querySelector('.codemirror'), {
   mode: 'oulipo',
-  lineNumbers: true,
-  indentUnit: 4,
-  smartIndent: true,
-  indentWithTaps: false,
-  electricChars: true,
+  theme: 'solarized light',
+  indentUnit: 2,
+  smartIndent: false,
+  tabSize: true,
+  indentWithTabs: false,
+  electricChars: false,
   lineWrapping: true,
-  autofocus: true,
-  theme: 'solarized light'
+  lineNumbers: true,
+  inputStyle: 'textarea'
 });
 
 function change() {
-  browserWindow.setDocumentEdited(isEdited = originalFile !== codemirror.getValue());
+  isEdited = originalFile !== codemirror.getValue();
+  // For some reason, calling this within the change function causes two line breaks to be inserted when pressing enter. No idea why.
+  setTimeout(function () {browserWindow.setDocumentEdited(isEdited);}, 10);
 }
 codemirror.on('change', change);
 
@@ -39,10 +44,10 @@ $('.btn').on('click', function(e) {
   e.target.blur();
 });
 
-$('.button-new').on('click', newFile);
-$('.button-open').on('click', openFile);
-$('.button-save').on('click', saveFile);
-$('.button-run').on('click', runScript);
+$('.button-new').on('click', function() {newFile();});
+$('.button-open').on('click', function() {openFile();});
+$('.button-save').on('click', function() {saveFile();});
+$('.button-run').on('click', function() {runScript();});
 
 newFile();
 
@@ -51,31 +56,40 @@ function newFile() {
     saveFile();
   }
 
-  codemirror.setValue(fs.readFileSync('./example.md', {encoding: 'utf-8'}));
+  codemirror.setValue('');
+  codemirror.clearHistory();
   fileName = null;
   browserWindow.setRepresentedFilename('');
 }
 
-function openFile() {
+function openFile(name) {
+  var file;
+
   if (isEdited && confirm('If you open a file, you\'ll lose your changes! Would you like to save first?')) {
     saveFile();
   }
 
-  var file = dialog.showOpenDialog(browserWindow, {
-    title: 'Open Script',
-    properties: ['openFile'],
-    filters: [
-      { name: 'Oulipo Scripts', extensions: ['oulipo', 'oul'] },
-      { name: 'Text Files', extensions: ['txt', 'md'] }
-    ]
-  });
+  if (!name) {
+    file = dialog.showOpenDialog(browserWindow, {
+      title: 'Open Script',
+      properties: ['openFile'],
+      filters: [
+        { name: 'Oulipo Scripts', extensions: ['oulipo', 'oul'] },
+        { name: 'Text Files', extensions: ['txt', 'md'] }
+      ]
+    });
 
-  if (!file || !file[0]) return;
-  file = file[0];
+    if (!file || !file[0]) return;
+    file = file[0];
+  } else {
+    file = name;
+  }
 
   originalFile = fs.readFileSync(file, {encoding: 'utf-8'});
   codemirror.setValue(originalFile);
+  codemirror.clearHistory();
   fileName = file;
+  app.addRecentDocument(file);
   browserWindow.setRepresentedFilename(file);
 }
 
@@ -98,9 +112,20 @@ function saveFile(as) {
 
   originalFile = codemirror.getValue();
   fs.writeFileSync(fileName, originalFile, {encoding: 'utf-8'});
+  app.addRecentDocument(fileName);
   change();
 }
 
 function runScript() {
-}
+  var source = codemirror.getValue();
+  var ast = parse(source);
 
+  if (ast.error) {
+    console.log(ast.error);
+    $('#error-modal-content').text(ast.error);
+    $('#error-modal').modal('show');
+    return;
+  }
+
+  console.log(ast);
+}

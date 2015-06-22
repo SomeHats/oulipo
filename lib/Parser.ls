@@ -3,12 +3,7 @@ require! {
   'fs'
 }
 
-source = fs.read-file-sync './example.md', encoding: 'utf-8'
-
-class Parser
-  (source) ->
-    @source = source
-
+module.exports = class Parser
   parse-default: ->
     @parse-dialogue 0, allow-sections: true
 
@@ -34,7 +29,7 @@ class Parser
     | @ch!.match /[A-Z]/ => @parse-line-or-choice!
     | @ch!.match /[a-z]/ => @parse-instruction!
     | @ch! is \[ => @parse-note!
-    | otherwise => throw "[parse-dialogue] Unexpected '#{@ch!}"
+    | otherwise => throw "[parse-dialogue] Unexpected '#{@ch!}'"
 
   # Complex structures to parse:
   parse-line-or-choice: ->
@@ -245,13 +240,14 @@ class Parser
     @consume /[a-zA-Z0-9\.\-\_]/
 
   # Utilities:
-  start: ->
+  parse: (source) ->
+    @source = source
     @pos = 0
 
     try
       return @parse-default!
     catch e
-      @log-pos e
+      throw new Error @log-pos(e.message || e)
 
   ch: -> @source[@pos] or '\n'
 
@@ -299,9 +295,8 @@ class Parser
 
   log-pos: (msg = '', at = @pos) ->
     [line, char] = @line-ch at
-    console.log "\nAt line #line, character #{char + 1}: '#{@ch!}'"
-    console.log (@source.split \\n)[line - 1]
-    console.log "#{replicate char, '~' .join ''}^", msg
-
-
-console.log (require \util).inspect (new Parser source .start!), depth: null, colors: true
+    """
+    At line #line, character #{char + 1}: '#{@ch!.replace '\n' '\\n'}'
+    #{(@source.split \\n)[line - 1]}
+    #{replicate(char, '~').join ''}^ #{msg}
+    """
