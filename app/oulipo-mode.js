@@ -141,7 +141,16 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
 
       return parseCondition(function(s, state) {
         s.eatSpace();
-        return parseStatement(s.next(), parseBranchChoice.bind(null, baseIndent, next), s, state);
+        // return parseStatement(s.next(), parseBranchChoice.bind(null, baseIndent, next), s, state);
+        return parseStatement(s.next(), function(s, state) {
+          s.eatSpace();
+          if (s.indentation() > baseIndent) {
+            state.f = parseDialogue.bind(null, s.indentation(), parseBranchChoice.bind(null, baseIndent, next));
+          } else {
+            state.f = parseBranchChoice.bind(null, baseIndent, next);
+          }
+          return state.f(s, state);
+        }, s, state);
       }, s, state);
     };
     return null;

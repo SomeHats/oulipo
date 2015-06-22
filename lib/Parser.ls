@@ -170,9 +170,14 @@ module.exports = class Parser
       condition = @parse-condition!
       @consume ' '
       statement = @parse-statement!
-      statement <<< {condition}
-      branches[*] = statement
       @consume /\s/
+
+      indent = @current-indent!
+      if indent > base-indent
+        statements = [statement] ++ @parse-dialogue indent
+      else statements = [statement]
+
+      branches[*] = {condition, next: statements}
 
     {type: \branch, branches}
 

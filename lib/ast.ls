@@ -39,9 +39,7 @@ export prepare = (ast, existing-sections = []) ->
 
     branch: (node) ->
       for branch in node.branches
-        if prepare-fns[branch.type]
-          prepare-fns[branch.type] branch
-        else throw new TypeError "Bad branch type '#{branch.type}'"
+        branch.next = prepare-lines branch.next, node.next
   }
 
   sections = {[node.name, node.lines.0] for node in section-array}
@@ -59,13 +57,6 @@ export prepare = (ast, existing-sections = []) ->
 
   prepare-lines nodes
   for section in section-array => prepare-lines section.lines
-
-  # ast = nodes.0
-  # walk ast, (node) ->
-  #   if node.type is \choice
-  #     console.log '-------------'
-  #     console.log node.choices.0
-  #     console.log '-------------'
 
   nodes.0
 

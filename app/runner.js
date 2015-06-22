@@ -92,18 +92,18 @@ var processors = {
     var i, l, def;
     for (i = 0, l = node.branches.length; i < l; i++) {
       if (node.branches[i].condition.is.default) {
-        def = node.branches[i];
+        def = node.branches[i].next;
         continue;
       }
       if (evalCondition(node.branches[i].condition)) {
         addMessage({type: 'branch', idx: i + 1});
-        return node.branches[i]._id;
+        return node.branches[i].next;
       }
     }
 
     if (def) {
       addMessage({type: 'branch', idx: 'default'});
-      return def._id;
+      return def;
     } else {
       throw new Error("No default and no valid condition in branch!");
     }
@@ -175,6 +175,7 @@ function addMessage(node, extras) {
 }
 
 function processNode(id) {
+  if (id._id) id = id._id;
   var node = nodes[id];
   console.log(id, node);
   state.node = node._id;
