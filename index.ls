@@ -16,7 +16,7 @@ app.on \open-file (e, file) ->
   else to-open := file
 
 app.on \ready ->
-  main-window := new BrowserWindow width: 1024, height: 768, 'min-width': 780
+  main-window := new BrowserWindow width: 1024, height: 768, 'min-width': 780, 'min-height': 600
   # main-window.open-dev-tools!
   main-window.on \closed -> main-window := null
   main-window.web-contents.on \did-finish-load ->

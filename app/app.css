@@ -1,5 +1,6 @@
 body {
   padding-top: 64px;
+  background-color: #fafafa;
 }
 
 .CodeMirror {
@@ -8,4 +9,77 @@ body {
 
 .navbar-header.pull-right {
   margin-right: 15px;
+}
+
+.runner-content {
+  position: absolute;
+  width: 50%;
+  left: 32px;
+  top: 0;
+  min-height: 100%;
+  padding-top: 96px;
+  padding-bottom: 64px;
+  margin-bottom: 0;
+}
+
+.runner-panel-container {
+  position: fixed;
+  top: 96px;
+  left: calc(50% + 64px);
+  right: 32px;
+  height: calc(100% - 96px);
+}
+
+.runner-data pre {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.runner-choices-panel {
+  position: absolute;
+  bottom: 32px;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.messages li {
+  clear: both;
+  animation: enter 0.4s;
+}
+
+.message-line {
+  float: left;
+  max-width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  background-color: white;
+}
+
+.message-line.choice {
+  float: right;
+  text-align: right;
+}
+
+.line-author {
+  font-weight: bold;
+}
+
+.message-set {
+  text-align: center;
+  font-weight: 100;
+}
+
+@keyframes enter {
+  from {
+    transform: translateY(64px) scale(0.6);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

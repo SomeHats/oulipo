@@ -49,6 +49,7 @@ $('.button-new').on('click', function() {newFile();});
 $('.button-open').on('click', function() {openFile();});
 $('.button-save').on('click', function() {saveFile();});
 $('.button-run').on('click', function() {runScript();});
+$('.button-stop').on('click', function() {clearRunner();});
 
 newFile();
 
@@ -57,6 +58,7 @@ function newFile() {
     saveFile();
   }
 
+  clearRunner();
   codemirror.setValue('');
   codemirror.clearHistory();
   fileName = null;
@@ -87,6 +89,7 @@ function openFile(name) {
   }
 
   originalFile = fs.readFileSync(file, {encoding: 'utf-8'});
+  clearRunner();
   codemirror.setValue(originalFile);
   codemirror.clearHistory();
   fileName = file;
@@ -146,5 +149,7 @@ function runScript() {
     return;
   }
 
-  console.log(ast);
+  // format the AST, the convery to/from JSON. converting like this is inefficient, but it's
+  // a quick way of getting a proper object instead of an atom remote object
+  run(JSON.parse(JSON.stringify(astUtils.flatten(astUtils.prepare(ast)))));
 }

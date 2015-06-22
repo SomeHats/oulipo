@@ -20,11 +20,33 @@
       </div>
       <div class="navbar-header pull-right">
         <button type="button" class="btn btn-success navbar-btn button-run">Run</button>
+        <button type="button" class="btn btn-danger navbar-btn button-stop" style="display: none;">Stop</button>
       </div>
     </nav>
 
     <div id="editor">
       <div class="codemirror"></div>
+    </div>
+
+    <div id="runner" style="display: none;">
+      <div class="runner-content">
+        <ul class="messages list-unstyled"></ul>
+      </div>
+
+      <div class="runner-panel-container">
+        <div class="runner-choices-panel panel panel-default">
+          <div class="panel-heading">Choose Line</div>
+          <div class="panel-body">
+            <ul class="runner-choices"></ul>
+          </div>
+        </div>
+        <div class="runner-data panel panel-default">
+          <div class="panel-heading">Data</div>
+          <div class="panel-body">
+            <pre> </pre>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div id="error-modal" class="modal fade" role="dialog">
@@ -50,6 +72,7 @@
     <script src="./vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="./vendor/codemirror/lib/codemirror.js"></script>
     <script src="./oulipo-mode.js"></script>
+    <script src="./runner.js"></script>
     <script src="./app.js"></script>
   </body>
 </html>

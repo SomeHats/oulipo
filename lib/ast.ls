@@ -30,10 +30,12 @@ export prepare = (ast, existing-sections = []) ->
         if typeof choice.next is \string
           choice.next = sections[choice.next]
         else if typeof! choice.next is \Array
-          choice.next = prepare-lines choice.next
+          choice.next = prepare-lines choice.next, node.next
         else throw new TypeError "Bad type of choice.next: '#{choice.next}'"
 
-    go: (node) -> node.to = sections[node.to]
+    go: (node) ->
+      node.next = sections[node.to]
+      delete node.to
 
     branch: (node) ->
       for branch in node.branches
@@ -44,16 +46,26 @@ export prepare = (ast, existing-sections = []) ->
 
   sections = {[node.name, node.lines.0] for node in section-array}
 
-  prepare-lines = (nodes) ->
+  prepare-lines = (nodes, final-next = null) ->
     for node, i in nodes
       if nodes[i + 1]
         node.next = that
+      else node.next = final-next
       if prepare-fns[node.type]
         prepare-fns[node.type] node
       else throw new TypeError "Bad node type '#{node.type}'"
 
+    nodes.0
+
   prepare-lines nodes
   for section in section-array => prepare-lines section.lines
+
+  # ast = nodes.0
+  # walk ast, (node) ->
+  #   if node.type is \choice
+  #     console.log '-------------'
+  #     console.log node.choices.0
+  #     console.log '-------------'
 
   nodes.0
 
@@ -67,5 +79,8 @@ export flatten = (ast) ->
 
   for id, node of nodes
     if node.next then node.next = node.next._id
+    if typeof! node.choices is \Array
+      for choice in node.choices when typeof choice.next is \object
+        choice.next = choice.next._id
 
   {start: ast._id, nodes}
