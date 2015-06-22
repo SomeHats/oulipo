@@ -8,6 +8,7 @@ var originalFile = null,
     fileName = null;
 
 var codemirror = CodeMirror(document.querySelector('.codemirror'), {
+  mode: 'oulipo',
   lineNumbers: true,
   indentUnit: 4,
   smartIndent: true,
@@ -50,7 +51,7 @@ function newFile() {
     saveFile();
   }
 
-  codemirror.setValue('');
+  codemirror.setValue(fs.readFileSync('./example.md', {encoding: 'utf-8'}));
   fileName = null;
   browserWindow.setRepresentedFilename('');
 }
