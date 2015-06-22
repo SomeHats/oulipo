@@ -2,8 +2,10 @@
 set -e
 set -x
 
-rm -rf .build dist
+rm -rf .build
+rm -rf dist
 mkdir .build
+
 cp -r ./app ./.build/app
 cp -r ./lib ./.build/lib
 cp ./index.js ./index.ls ./package.json ./.build
