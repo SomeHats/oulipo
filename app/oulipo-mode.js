@@ -1,4 +1,5 @@
 CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
+  var indentUnit = cmCfg.indentUnit;
 
   function parseDialogue(indentation, next, s, state) {
     if (s.indentation() < indentation) {
@@ -8,6 +9,7 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
     var ch = s.next();
     if (ch === '#') {
       s.skipToEnd();
+      state.lastLineType = 'header';
       return 'header';
     } else if (ch === '\n') {
       return null;
@@ -30,14 +32,17 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
 
   function parseLineOrChoice(next, s, state) {
     consumeName(s);
+    state.lastLineType = '';
     state.f = function(s, state) {
       s.eatSpace();
       if (s.next() === ':') {
         s.eatSpace();
         if (s.eol()) {
           s.next();
+          state.lastLineType = 'choice-start';
           state.f = parseChoiceList(s.indentation(), next);
         } else {
+          state.lastLineType = 'line';
           state.f = function(s, state) {
             return parseString(next, s, state);
           };
@@ -52,7 +57,93 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
     return 'variable-2';
   }
 
+  function parseChoiceList(baseIndent, next) {
+    var thisFn = function(s, state) {
+      var ch = s.peek();
+      if (s.indentation() > baseIndent && ch.match(/[\-\*\+]/)) {
+        s.next();
+        s.eatSpace();
+        state.f = bind(parseChoice, thisFn);
+        return null;
+      } else {
+        state.f = next;
+        return call(state.f, s, state);
+      }
+    };
+    return thisFn;
+  }
+
+  function parseChoice(next, s, state) {
+    var ch = s.peek();
+    if (ch === '(') {
+      return parseCondition(bind(parseChoice, next), s, state);
+    } else if (ch === '\'' || ch === '"') {
+      // quoted string
+      s.next();
+      s.eatSpace();
+      if (s.eol()) {
+        state.lastLineType = 'choice-continued';
+      } else {
+        state.lastLineType = 'choice-next';
+      }
+      return parseQuotedString(ch, bind(parseChoiceEnd, next), s, state);
+    } else {
+      // implicit string
+      while (!s.match('->', false) && !s.eol()) {
+        s.next();
+      }
+
+      if (s.match('->', false)) {
+        state.lastLineType = 'choice-next';
+      } else {
+        state.lastLineType = 'choice-continued';
+      }
+      state.f = bind(parseChoiceEnd, next);
+      return 'implicit-string';
+    }
+  }
+
+  function parseChoiceEnd(next, s, state) {
+    if (s.sol() || s.indentation() === s.column()) {
+      state.lastLineType = 'choice-continued';
+      state.f = bind(parseChoiceNext, next);
+      return call(state.f, s, state);
+    } else if (s.match('->')) {
+      state.lastLineType = 'choice-next';
+      s.eatSpace();
+      state.f = function(s, state) {
+        consumeIdentifier(s);
+        state.f = endLine(next);
+        return 'variable-3';
+      };
+      return 'builtin';
+    } else {
+      state.lastLineType = 'choice-continued';
+      state.f = bind(parseChoiceNext, next);
+      if (s.eol()) {
+        s.next();
+        return null;
+      } else {
+        s.skipToEnd();
+        return 'error';
+      }
+    }
+  }
+
+  function parseChoiceNext(next, s, state) {
+    s.eatSpace();
+    if(s.peek().match(/[\-\*\+]/)) {
+      state.f = next;
+    } else {
+      state.f = bind(parseDialogue, s.indentation(), function(s, state) {
+        return call(next, s, state);
+      });
+    }
+    return call(state.f, s, state);
+  }
+
   function parseInstruction(next, s, state) {
+    state.lastLineType = '';
     consumeIdentifier(s);
     var name = s.current();
     s.eatSpace();
@@ -112,6 +203,7 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
     },
 
     branch: function(next, s, state) {
+      state.lastLineType = 'branch';
       s.skipToEnd();
       state.f = function(s, state) {
         state.f = bind(parseBranchChoice, s.indentation(), next);
@@ -163,6 +255,7 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
   }
 
   function parseNote(next, s, state) {
+    state.lastLineType = '';
     if (!state.noteDepth) {
       state.noteDepth = 1;
     }
@@ -179,74 +272,6 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
     }
     state.f = bind(parseNote, next);
     return 'comment';
-  }
-
-  function parseChoiceList(baseIndent, next) {
-    var thisFn = function(s, state) {
-      var ch = s.peek();
-      if (s.indentation() > baseIndent && ch.match(/[\-\*\+]/)) {
-        s.next();
-        s.eatSpace();
-        state.f = bind(parseChoice, thisFn);
-        return null;
-      } else {
-        state.f = next;
-        return call(state.f, s, state);
-      }
-    };
-    return thisFn;
-  }
-
-  function parseChoice(next, s, state) {
-    var ch = s.peek();
-    if (ch === '(') {
-      return parseCondition(bind(parseChoice, next), s, state);
-    } else if (ch === '\'' || ch === '"') {
-      // quoted string
-      s.next();
-      return parseQuotedString(ch, bind(parseChoiceEnd, next), s, state);
-    } else {
-      // implicit string
-      while (!s.match('->', false) && !s.eol()) {
-        s.next();
-      }
-      state.f = bind(parseChoiceEnd, next);
-      return 'implicit-string';
-    }
-  }
-
-  function parseChoiceEnd(next, s, state) {
-    if (s.sol() || s.indentation() === s.column()) {
-      state.f = bind(parseChoiceNext, next);
-      return call(state.f, s, state);
-    } else if (s.match('->')) {
-      s.eatSpace();
-      state.f = function(s, state) {
-        consumeIdentifier(s);
-        state.f = endLine(next);
-        return 'variable-3';
-      };
-      return 'builtin';
-    } else {
-      state.f = bind(parseChoiceNext, next);
-      if (s.eol()) {
-        s.next();
-        return null;
-      } else {
-        s.skipToEnd();
-        return 'error';
-      }
-    }
-  }
-
-  function parseChoiceNext(next, s, state) {
-    s.eatSpace();
-    if(s.peek().match(/[\-\*\+]/)) {
-      state.f = next;
-    } else {
-      state.f = bind(parseDialogue, s.indentation(), next);
-    }
-    return call(state.f, s, state);
   }
 
   function parseCondition(next, s, state) {
@@ -419,13 +444,17 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
   var mode = {
     startState: function() {
       return {
-        f: bind(parseDialogue, 0, function(){})
+        f: bind(parseDialogue, 0, function(){}),
+        lastIndent: 0,
+        lastLineType: ''
       };
     },
     copyState: function(s) {
       return {
         f: s.f,
-        noteDepth: s.noteDepth
+        noteDepth: s.noteDepth,
+        lastIndent: s.lastIndent,
+        lastLineType: s.lastLineType
       };
     },
     token: function(s, state) {
@@ -436,9 +465,23 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
       console.log('----------------------------------------');
       var f = state.f;
       var res = call(state.f, s, state);
-      console.log('token', '"' + s.current() + '" -> ' + res + ', "' + s.string + '"', f);
+      console.log('token:', '"' + s.current() + '" -> ' + res + ', "' + s.string + '", lastLineType:', state.lastLineType, f, state);
+      state.lastIndent = s.indentation();
       return res;
-    }
+    },
+    indent: function(state, line) {
+      console.log('indent', state, line, state);
+      if (state.lastLineType === 'choice-start' || state.lastLineType === 'branch' || state.lastLineType === 'choice-continued') {
+        return state.lastIndent + indentUnit;
+      }
+
+      if (state.lastLineType === 'choice-next' && !line.match(/^[ \t]*[\-\+\*]/)) {
+        return state.lastIndent - indentUnit;
+      }
+
+      return state.lastIndent;
+    },
+    electricInput: /^[ \t]*[\-\*\+]$/
   };
 
   return mode;

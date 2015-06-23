@@ -122,24 +122,29 @@ function updateScroll() {
 }
 
 function evalCondition(condition) {
+  console.log("--------------------------- evalCondition");
   return !!evalExpression(condition.expression) === condition.is;
 }
 
 function evalExpression(exp) {
-  switch (exp.type) {
-    case 'expression':
-      return evalExpression(exp.exp);
-    case 'operator':
-      return evalOperation[exp.op](evalExpression(exp.left), evalExpression(exp.right));
-    case 'identifier':
-      return state[exp.val];
-    case 'number':
-    case 'boolean':
-    case 'string':
-      return exp.val;
-    default:
-      throw new TypeError("Bad type of expression: " + exp.type);
-  }
+  var res = function() {
+    switch (exp.type) {
+      case 'expression':
+        return evalExpression(exp.exp);
+      case 'operator':
+        return evalOperation[exp.op](evalExpression(exp.left), evalExpression(exp.right));
+      case 'identifier':
+        return state[exp.val];
+      case 'number':
+      case 'boolean':
+      case 'string':
+        return exp.val;
+      default:
+        throw new TypeError("Bad type of expression: " + exp.type);
+    }
+  }();
+  console.log('evalExpression', exp, res);
+  return res;
 }
 
 var evalOperation = {

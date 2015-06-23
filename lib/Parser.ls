@@ -229,9 +229,9 @@ module.exports = class Parser
 
   parse-exp-item: ->
     | @match /^(&|\||==|!=|<|>|<=|>=|\+|\-|\*|\/|isnt|is|and|or)/, true => type: \operator, op: that
-    | @match /^\-?[0-9]+(\.[0-9]+)?/, true => type: \number, val: that
+    | @match /^\-?[0-9]+(\.[0-9]+)?/, true => type: \number, val: parse-float that
     | @match /^(true|false)/, true => type: \boolean, val: (if that is \true then true else false)
-    | @match /^[a-zA-Z_\-\.]+/, true => type: \identifier, val: that
+    | @match /^[a-zA-Z_][a-zA-Z0-9_\-\.]*/, true => type: \identifier, val: that
     | @ch! in [\' \"] => type: \string, val: @parse-quoted-string!
     | otherwise => throw "[parse-exp-item] Unexpected '#{@ch!}'"
 
@@ -283,7 +283,9 @@ module.exports = class Parser
     string
 
   parse-identifier: ->
-    @consume /[a-zA-Z0-9\.\-\_]/
+    res = @match /^[a-zA-Z_][a-zA-Z0-9_\-\.]*/, true
+    console.log 'parse-identifier' res
+    res
 
   # Utilities:
   parse: (source) ->
