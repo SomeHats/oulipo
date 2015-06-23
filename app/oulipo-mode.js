@@ -118,6 +118,12 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
         return state.f(s, state);
       };
       return null;
+    },
+
+    continue: function(next, s, state) {
+      s.eatSpace();
+      state.f = endLine(next);
+      return null;
     }
   };
 

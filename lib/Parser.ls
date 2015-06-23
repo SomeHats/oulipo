@@ -51,6 +51,7 @@ module.exports = class Parser
     | \go, \goto => @parse-instruction-go!
     | \exec => @parse-instruction-exec!
     | \branch => @parse-instruction-branch!
+    | \continue => @parse-instruction-continue!
     | otherwise => throw "Unknown command '#{name}'. Character names for lines of dialogue must start with a capital letter"
 
   parse-section: ->
@@ -180,6 +181,10 @@ module.exports = class Parser
       branches[*] = {condition, next: statements}
 
     {type: \branch, branches}
+
+  parse-instruction-continue: ->
+    @consume ' '
+    {type: \continue}
 
   # Literal values etc.
   parse-expression: ->

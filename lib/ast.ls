@@ -24,6 +24,7 @@ export prepare = (ast, existing-sections = []) ->
     set: id
     note: id
     exec: id
+    continue: id
 
     choice: (node) ->
       for choice in node.choices

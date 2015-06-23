@@ -84,6 +84,9 @@ var processors = {
   go: function(node) {
     return node.next;
   },
+  continue: function(node) {
+    return node.next;
+  },
   exec: function(node) {
     addMessage(node);
     return node.next;
