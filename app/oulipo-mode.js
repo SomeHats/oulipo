@@ -3,7 +3,7 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
   function parseDialogue(indentation, next, s, state) {
     if (s.indentation() < indentation) {
       state.f = next;
-      return state.f(s, state);
+      return call(state.f, s, state);
     }
     var ch = s.next();
     if (ch === '#') {
@@ -12,7 +12,7 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
     } else if (ch === '\n') {
       return null;
     } else {
-      return parseStatement(ch, parseDialogue.bind(null, indentation, next), s, state);
+      return parseStatement(ch, bind(parseDialogue, indentation, next), s, state);
     }
   }
 
@@ -57,7 +57,7 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
     var name = s.current();
     s.eatSpace();
     if (instructions[name]) {
-      state.f = instructions[name].bind(null, next);
+      state.f = bind(instructions[name], next);
       return 'builtin';
     } else {
       s.skipToEnd();
@@ -114,8 +114,8 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
     branch: function(next, s, state) {
       s.skipToEnd();
       state.f = function(s, state) {
-        state.f = parseBranchChoice.bind(null, s.indentation(), next);
-        return state.f(s, state);
+        state.f = bind(parseBranchChoice, s.indentation(), next);
+        return call(state.f, s, state);
       };
       return null;
     },
@@ -133,7 +133,7 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
     s.eatSpace();
     if (s.indentation() < baseIndent || !s.peek().match(/[\-\*\+]/)) {
       state.f = next;
-      return state.f(s, state);
+      return call(state.f, s, state);
     }
 
     s.next(); // consume bullet point
@@ -141,21 +141,21 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
     state.f = function(s, state) {
       if (s.peek() !== '(') {
         s.skipToEnd();
-        state.f = parseBranchChoice.bind(null, baseIndent, next);
+        state.f = bind(parseBranchChoice, baseIndent, next);
         return 'error';
       }
 
       return parseCondition(function(s, state) {
         s.eatSpace();
-        // return parseStatement(s.next(), parseBranchChoice.bind(null, baseIndent, next), s, state);
+        // return parseStatement(s.next(), bind(parseBranchChoice, baseIndent, next), s, state);
         return parseStatement(s.next(), function(s, state) {
           s.eatSpace();
           if (s.indentation() > baseIndent) {
-            state.f = parseDialogue.bind(null, s.indentation(), parseBranchChoice.bind(null, baseIndent, next));
+            state.f = bind(parseDialogue, s.indentation(), bind(parseBranchChoice, baseIndent, next));
           } else {
-            state.f = parseBranchChoice.bind(null, baseIndent, next);
+            state.f = bind(parseBranchChoice, baseIndent, next);
           }
-          return state.f(s, state);
+          return call(state.f, s, state);
         }, s, state);
       }, s, state);
     };
@@ -177,21 +177,21 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
         return 'comment';
       }
     }
-    state.f = parseNote.bind(null, next);
+    state.f = bind(parseNote, next);
     return 'comment';
   }
 
   function parseChoiceList(baseIndent, next) {
     var thisFn = function(s, state) {
       var ch = s.peek();
-      if (s.indentation() >= baseIndent && ch.match(/[\-\*\+]/)) {
+      if (s.indentation() > baseIndent && ch.match(/[\-\*\+]/)) {
         s.next();
         s.eatSpace();
-        state.f = parseChoice.bind(null, thisFn);
+        state.f = bind(parseChoice, thisFn);
         return null;
       } else {
         state.f = next;
-        return state.f(s, state);
+        return call(state.f, s, state);
       }
     };
     return thisFn;
@@ -200,25 +200,25 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
   function parseChoice(next, s, state) {
     var ch = s.peek();
     if (ch === '(') {
-      return parseCondition(parseChoice.bind(null, next), s, state);
+      return parseCondition(bind(parseChoice, next), s, state);
     } else if (ch === '\'' || ch === '"') {
       // quoted string
       s.next();
-      return parseQuotedString(ch, parseChoiceEnd.bind(null, next), s, state);
+      return parseQuotedString(ch, bind(parseChoiceEnd, next), s, state);
     } else {
       // implicit string
       while (!s.match('->', false) && !s.eol()) {
         s.next();
       }
-      state.f = parseChoiceEnd.bind(null, next);
+      state.f = bind(parseChoiceEnd, next);
       return 'implicit-string';
     }
   }
 
   function parseChoiceEnd(next, s, state) {
-    if (s.sol() || s.indentation() === s.pos) {
-      state.f = parseChoiceNext.bind(null, next);
-      return state.f(s, state);
+    if (s.sol() || s.indentation() === s.column()) {
+      state.f = bind(parseChoiceNext, next);
+      return call(state.f, s, state);
     } else if (s.match('->')) {
       s.eatSpace();
       state.f = function(s, state) {
@@ -228,7 +228,7 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
       };
       return 'builtin';
     } else {
-      state.f = parseChoiceNext.bind(null, next);
+      state.f = bind(parseChoiceNext, next);
       if (s.eol()) {
         s.next();
         return null;
@@ -244,9 +244,9 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
     if(s.peek().match(/[\-\*\+]/)) {
       state.f = next;
     } else {
-      state.f = parseDialogue.bind(null, s.indentation(), next);
+      state.f = bind(parseDialogue, s.indentation(), next);
     }
-    return state.f(s, state);
+    return call(state.f, s, state);
   }
 
   function parseCondition(next, s, state) {
@@ -256,7 +256,7 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
       consumeIdentifier(s);
       var id = s.current().trim();
       if (id === 'if' || id === 'unless') {
-        state.f = parseExpression.bind(null, '(', ')', 1, next);
+        state.f = bind(parseExpression, '(', ')', 1, next);
         return 'builtin';
       } else if (id === 'default') {
         state.f = function(s, state) {
@@ -294,7 +294,7 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
     if (ch === open) {
       depth++;
       s.next();
-      state.f = parseExpression.bind(null, open, close, depth, next);
+      state.f = bind(parseExpression, open, close, depth, next);
       return null;
     } else if (ch === close) {
       depth--;
@@ -303,18 +303,23 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
         s.eatSpace();
         state.f = next;
       } else {
-        state.f = parseExpression.bind(null, open, close, depth, next);
+        state.f = bind(parseExpression, open, close, depth, next);
       }
       return null;
     } else if (s.eatWhile(/[\=\+\-\*\?]/)) {
       return 'operator';
     } else {
-      return parseValue(parseExpression.bind(null, open, close, depth, next), s, state);
+      return parseValue(bind(parseExpression, open, close, depth, next), s, state);
     }
   }
 
   function parseValue(next, s, state) {
     var ch = s.next();
+    if (!ch) {
+      state.f = next;
+      return null;
+    }
+
     if (ch.match(/[0-9\-\.]/)) {
       state.f = next;
       consumeNumber(s);
@@ -365,7 +370,7 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
         return 'string';
       }
     }
-    state.f = parseQuotedString.bind(null, quote, next);
+    state.f = bind(parseQuotedString, quote, next);
     return 'string';
   }
 
@@ -377,8 +382,8 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
     return function(s, state) {
       s.eatSpace();
       state.f = next;
-      if (s.sol() || s.pos === s.indentation()) {
-        return state.f(s, state);
+      if (s.sol() || s.column() === s.indentation()) {
+        return call(state.f, s, state);
       } else if (s.eol()) {
         s.next();
         return null;
@@ -390,10 +395,31 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
     };
   }
 
+  function bind(fn) {
+    var args = [].slice.call(arguments, 1);
+    return {
+      fn: fn,
+      args: args
+    };
+  }
+
+  function call(f) {
+    var args = [].slice.call(arguments, 1),
+      res;
+    if (typeof f === 'function') {
+      res = f.apply(null, args);
+    } else {
+      res = f.fn.apply(null, f.args.concat(args));
+    }
+
+    console.log('call', f, res);
+    return res;
+  }
+
   var mode = {
     startState: function() {
       return {
-        f: parseDialogue.bind(null, 0, function(){})
+        f: bind(parseDialogue, 0, function(){})
       };
     },
     copyState: function(s) {
@@ -407,8 +433,10 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
         return null;
       }
 
+      console.log('----------------------------------------');
       var f = state.f;
-      var res = state.f(s, state);
+      var res = call(state.f, s, state);
+      console.log('token', '"' + s.current() + '" -> ' + res + ', "' + s.string + '"', f);
       return res;
     }
   };
