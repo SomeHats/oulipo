@@ -1,0 +1,159 @@
+N: COS
+N: A half-true story about half-truths.
+N: Hey there, player. Glad to have you for the next 20 minutes, I guess.
+N: What would you like to do now?
+Player:
+	- Let's play this thing! -> play
+	- Who are you? -> credits
+	- Hm, tell me more. -> about
+
+# credits
+set asked-credits
+N: Ah, how rude of me! Let me introduce myself.
+N: Hi, I'm Nicky Case.
+N: That's not my legal name, it's just my REAL name.
+Player: That's totes weird, dude.
+
+branch:
+	- (if asked-about) Player: And like you just told me, this is your personal story?
+	- (default) Player: And you made this game?
+
+N: Yep, I am the sole writer / programmer / artist of Coming Out Simulator.
+
+branch:
+	- (if asked-about) Player: All of this yourself?
+		Player: I said it before and I'll say it again...
+		Player: Of course. You narcissist.
+		N: Well it's not ALL me.
+		N: The sounds & audio are from various public domain sources.
+	- (default) N: The sounds & audio, though, are from various public domain sources.
+
+N: But although it's mostly just me behind this game...
+N: ...there's a lot of people behind this game's story.
+
+branch:
+	- (if asked-about) Player:
+		- Speaking of which, let's play that! Now! -> play
+	- (default) Player:
+		- Speaking of that, can we play it now? -> play
+		- Why'd you make this? (About This Game) -> about
+		
+# about
+set asked-about
+branch:
+	- (if asked-credits) N: I wanted to tell my story.
+	- (default) N: This game...
+		N: ...more like a conversation simulator, really...
+		N: ...is a very personal story.
+	
+Player: Of course. You narcissist.
+N: Ha, of course.
+
+branch:
+	- (if asked-credits) P: Actually no, a narcissist would use their real name.
+		N: I told you, it IS my real na--
+		Player: Aight, aight. Weirdo.
+	- (default) continue
+
+N: I made this game for the #Nar8 Game Jam. Gave me an excuse. And a deadline!
+Player: You procrastinated until the last day to enter, didn't you.
+N: Yes.
+N: Also! This game is uncopyrighted. Dedicated to the public domain.
+N: I'm as open with my source code as I am with my sexuality.
+Player: Ugh, that's a terrible pun.
+N: Howzabout a 'Fork Me' programming pun?
+Player: noooooo.
+
+branch:
+	- (if asked-credits) Player:
+		- Let's just play this game already. -> play
+	- (default) Player:
+		- Bad puns aside, can we play now? -> play
+		- So who ARE you? (About Me) -> credits
+	
+# play
+branch:
+	- (unless asked-about or asked-credits) N: Jumping right into it! Great!
+			N: No messing around with reading the About Me or the About This Game sections or--
+			Player: Shush.
+			N: Fine, fine.
+	- (if asked-about and asked-credits) Player: ". . ."
+			Player: Why did you make that a clickable option, when it was the only option left.
+			N: NO IDEA
+	- (if asked-about or asked-credits) N: Yes, let's!
+
+N: Let's travel back five years ago, to 2010...
+Player: That was FIVE years ago?!
+N: ...to the evening that changed my life forever.
+N: Tell me, dear player, how do you think this all ends?
+Player:
+	- With flowers and rainbows and gay unicorns?
+		set main-menu-convo-1 = 1
+		N: Yes. That is exactly how this game ends.
+		Player: Really?
+		N: No.
+	- Apparently, with you redditing at Starbucks.
+		set main-menu-convo-1 = 2
+		N: Hey, I'm coding on this laptop. Turning my coming-of-age story into the game you're playing right now.
+		Player: Naw, you're probably procrastinating.
+		N: Look who's talking.
+		Player: Touché, douché.
+		N: Anyway...
+	- IT ALL ENDS IN BLOOD
+		set main-menu-convo-1 = 2
+		N: Uh, compared to that, I guess my story isn't that tragic.
+		N: Although that's kind of a glass one-hundredths-full interpretation.
+		Player: blooooood.
+		N: Anyway...
+
+branch:
+	- (if asked-about) N: If you didn't skip the About This Game section, you'd know this is a very personal story.
+		Player: Shush.
+	- (default) continue
+	
+N: This game includes dialogue that I, my parents, and my ex-boyfriend actually said.
+N: As well as all the things we could have, should have, and never would have said.
+N: It doesn't matter which is which.
+N: Not anymore.
+Player:
+	- How can I win a game with no right answers?
+		set main-menu-convo-2 = 2
+		N: Exactly.
+		Player: '. . .'
+	- You're a bit of a downer, aren't you?
+		set main-menu-convo-2 = 1
+		N: LIFE is a bit of a downer.
+		Player: So that's a yes.
+	- This 'true' game is full of lies?
+		set main-menu-convo-2 = 3
+		N: Even if the dialogue was 100% accurate, it'd still be 100% lies.
+		Player: '. . .'
+		
+N: You'll be playing as me, circa 2010.
+branch:
+	- (if asked-about) N: Because you skipped the About Me, my (not-yet-legal) name is Nicky Case. Just so you know.
+		Player: Shush.
+	- (default) continue
+	
+branch:
+	- (if main-menu-convo-1 is 1) N: This game doesn't end with gay unicorns.
+	- (if main-menu-convo-1 is 2) N: This game is a coming-out, a coming-of-age, a coming-to-terms. 
+	- (default) N: This game ends not in blood, but in tears. 
+	
+branch:
+	- (if main-menu-convo-2 is 1) N: Sorry for being a bit of a downer.
+	- (if main-menu-convo-2 is 2) N: And there are no right answers.
+	- (default) N: And it's full of lies.
+	
+Player: Hey, I just said that!
+N: When you play...
+N: Choose your words wisely.
+N: Every character will remember everything you say. Or don't say.
+Player: Yeah. You even brought up my choices in this MAIN MENU.
+N: Exactly.
+N: . . .
+N: Some things are hard not to remember.
+N: END!
+
+
+
