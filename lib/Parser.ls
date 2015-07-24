@@ -135,7 +135,6 @@ module.exports = class Parser
     }[type]
 
     expression = @parse-expression 1
-    console.log 'EXPRESSION' JSON.stringify expression, null, 2
 
     @next!
     if type is \default and expression.exp.length isnt 0 then throw "Default condition should have no expression"
@@ -284,7 +283,6 @@ module.exports = class Parser
 
   parse-identifier: ->
     res = @match /^[a-zA-Z_][a-zA-Z0-9_\-\.]*/, true
-    console.log 'parse-identifier' res
     res
 
   # Utilities:
