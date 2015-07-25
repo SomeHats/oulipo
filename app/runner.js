@@ -133,6 +133,8 @@ function evalExpression(exp) {
         return evalExpression(exp.exp);
       case 'operator':
         return evalOperation[exp.op](evalExpression(exp.left), evalExpression(exp.right));
+      case 'unary':
+        return evalUnary[exp.op](evalExpression(exp.exp));
       case 'identifier':
         return state[exp.val];
       case 'number':
@@ -160,6 +162,10 @@ var evalOperation = {
   '-':  function(left, right) { return left - right; },
   '*':  function(left, right) { return left * right; },
   '/':  function(left, right) { return left / right; },
+};
+
+var evalUnary = {
+  '!':  function(exp) { return !exp; }
 };
 
 var state = {},

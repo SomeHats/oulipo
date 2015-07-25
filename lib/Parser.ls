@@ -187,8 +187,9 @@ module.exports = class Parser
 
   # Literal values etc.
   parse-expression: ->
-    precedence = <[& | == != < > <= >= + - * /]>
-    split-on = (op, obj) ->
+    binary-precedence = <[& | == != < > <= >= + - * /]>
+    unary-precedence = <[!]>
+    binary-split-on = (op, obj) ->
       if typeof! obj is \Array
         if obj.length is 1 then return obj.0
         i = find-index ( .op is op ), obj
@@ -196,13 +197,30 @@ module.exports = class Parser
         return {
           type: \operator
           op: op
-          left: split-on op, (take i, obj)
-          right: split-on op, (drop i + 1, obj)
+          left: binary-split-on op, (take i, obj)
+          right: binary-split-on op, (drop i + 1, obj)
         }
       else if typeof obj is \object
-        if obj.left then obj.left = split-on op, obj.left
-        if obj.right then obj.right = split-on op, obj.right
-        if obj.exp then obj.exp = split-on op, obj.exp
+        if obj.left then obj.left = binary-split-on op, obj.left
+        if obj.right then obj.right = binary-split-on op, obj.right
+        if obj.exp then obj.exp = binary-split-on op, obj.exp
+        return obj
+      else throw new TypeError "Cannot split on #{obj}"
+
+    unary-split-on = (op, obj) ->
+      if typeof! obj is \Array
+        if obj.length is 1 then return obj.0
+        i = find-index ( .op is op ), obj
+        unless i? then return obj
+        return {
+          type: \unary
+          op: op
+          exp: unary-split-on op, (drop i + 1, obj)
+        }
+      else if typeof obj is \object
+        if obj.left then obj.left = unary-split-on op, obj.left
+        if obj.right then obj.right = unary-split-on op, obj.right
+        if obj.exp then obj.exp = unary-split-on op, obj.exp
         return obj
       else throw new TypeError "Cannot split on #{obj}"
 
@@ -218,16 +236,18 @@ module.exports = class Parser
       else
         tokens[*] = @parse-exp-item!
 
-    for token in tokens when token.type is \operator and token.op in <[is isnt and or]>
-      token.op = {is: '==', isnt: '!=', and: '&', or: '|'}[token.op]
+    for token in tokens when token.type is \operator and token.op in <[is isnt and or not]>
+      token.op = {is: '==', isnt: '!=', and: '&', or: '|', not: '!'}[token.op]
 
     exp = tokens
-    for op in precedence => exp = split-on op, exp
+    for op in binary-precedence => exp = binary-split-on op, exp
+    for op in unary-precedence => exp = unary-split-on op, exp, true
+    console.log \expression exp
 
     {type: \expression, exp}
 
   parse-exp-item: ->
-    | @match /^(&|\||==|!=|<|>|<=|>=|\+|\-|\*|\/|isnt|is|and|or)/, true => type: \operator, op: that
+    | @match /^(&|\||==|!=|<|>|<=|>=|\+|\-|\*|\/|!|isnt|is|and|or|not)/, true => type: \operator, op: that
     | @match /^\-?[0-9]+(\.[0-9]+)?/, true => type: \number, val: parse-float that
     | @match /^(true|false)/, true => type: \boolean, val: (if that is \true then true else false)
     | @match /^[a-zA-Z_][a-zA-Z0-9_\-\.]*/, true => type: \identifier, val: that
