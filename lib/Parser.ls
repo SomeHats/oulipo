@@ -36,6 +36,7 @@ module.exports = class Parser
     name = @parse-name!
     @consume ' '
     if @ch! is \\n
+      if name.emotion then throw "[parse-line-or-choice] Name shouldn't include emotion"
       @next!
       choices = @parse-choice-list!
       {type: \choice, name, choices}
@@ -93,6 +94,17 @@ module.exports = class Parser
       condition = @parse-condition!
       @consume ' '
 
+    if @ch! is \[
+      @next!
+      @consume ' '
+      emotion = @consume /[a-zA-Z0-9_-]/
+      @consume ' '
+      if emotion.length is 0 then throw "[parse-choice] Expected emotion, got #{@ch!}"
+      if @ch! is \]
+        @next!
+        @consume ' '
+      else throw "[parse-choice] Expected ], got #{@ch!}"
+
     if @ch! in [\' \"]
       content = @parse-quoted-string!
       @consume ' '
@@ -122,7 +134,7 @@ module.exports = class Parser
           content += @ch!
           @next!
 
-    {content, next, condition}
+    {content, next, condition, emotion}
 
   parse-condition: ->
     @next! # skip over opening '('
@@ -242,7 +254,6 @@ module.exports = class Parser
     exp = tokens
     for op in binary-precedence => exp = binary-split-on op, exp
     for op in unary-precedence => exp = unary-split-on op, exp, true
-    console.log \expression exp
 
     {type: \expression, exp}
 
@@ -255,18 +266,25 @@ module.exports = class Parser
     | otherwise => throw "[parse-exp-item] Unexpected '#{@ch!}'"
 
   parse-name: ->
-    name = ''
-    loop
-      if @ch!.match /[a-zA-Z0-9_-]/
-        name += @ch!
-      else if @ch! is ':'
-        if name.length is 0
-          throw 'Expected name, got :'
-        else
-          @next!
-          return name
-      else throw "Bad name character: #{@ch!}"
+    name = @consume /[a-zA-Z0-9_-]/
+    @consume ' '
+    if name.length is 0 then throw "Expexted name, got #{@ch!}"
+    if @ch! is '['
+      # emotion
       @next!
+      @consume ' '
+      emotion = @consume /[a-zA-Z0-9_-]/
+      @consume ' '
+      if emotion.length is 0 then throw "Expected emotion, got #{@ch!}"
+      if @ch! is ']'
+        @next!
+        @consume ' '
+      else throw "Expected ']', got #{@ch!}"
+
+    if @ch! is ':'
+      @next!
+      return {name, emotion}
+    else throw "Expected ':', got #{@ch!}"
 
   parse-value: ->
     | @ch!.match /[0-9\-\.]/ => @parse-number!

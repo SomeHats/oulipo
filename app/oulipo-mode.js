@@ -1,5 +1,15 @@
 CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
   var indentUnit = cmCfg.indentUnit;
+  var debug = false;
+
+  var builtins = 'true false and or not is isnt'.split(' ');
+
+  function contains(needle, haystack) {
+    for (var i = 0, l = haystack.length; i < l; i++) {
+      if (needle === haystack[i]) return true;
+    }
+    return false;
+  }
 
   function parseDialogue(indentation, next, s, state) {
     if (s.indentation() < indentation) {
@@ -35,19 +45,19 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
     state.lastLineType = '';
     state.f = function(s, state) {
       s.eatSpace();
-      if (s.next() === ':') {
-        s.eatSpace();
-        if (s.eol()) {
-          s.next();
-          state.lastLineType = 'choice-start';
-          state.f = parseChoiceList(s.indentation(), next);
-        } else {
-          state.lastLineType = 'line';
-          state.f = function(s, state) {
-            return parseString(next, s, state);
-          };
-        }
-        return null;
+      var nextChar = s.next();
+      if (nextChar === ':') {
+        return parseLineOrChoiceContents(next, s, state);
+      } else if (nextChar === '[') {
+        return parseEmotion(function(s, state) {
+          if (s.next() === ':') {
+            return parseLineOrChoiceContents(next, s, state);
+          } else {
+            s.skipToEnd();
+            state.f = next;
+            return 'error';
+          }
+        }, s, state);
       } else {
         s.skipToEnd();
         state.f = next;
@@ -55,6 +65,21 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
       }
     };
     return 'variable-2';
+  }
+
+  function parseLineOrChoiceContents(next, s, state) {
+    s.eatSpace();
+    if (s.eol()) {
+      s.next();
+      state.lastLineType = 'choice-start';
+      state.f = parseChoiceList(s.indentation(), next);
+    } else {
+      state.lastLineType = 'line';
+      state.f = function(s, state) {
+        return parseString(next, s, state);
+      };
+    }
+    return null;
   }
 
   function parseChoiceList(baseIndent, next) {
@@ -77,6 +102,9 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
     var ch = s.peek();
     if (ch === '(') {
       return parseCondition(bind(parseChoice, next), s, state);
+    } else if (ch === '[') {
+      s.next();
+      return parseEmotion(bind(parseChoice, next), s, state);
     } else if (ch === '\'' || ch === '"') {
       // quoted string
       s.next();
@@ -309,6 +337,24 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
     return null;
   }
 
+  function parseEmotion(next, s, state) {
+    state.f = function(s, state) {
+      consumeName(s);
+      s.eatSpace();
+      state.f = function(s, state) {
+        state.f = next;
+        if (s.next() === ']') {
+          s.eatSpace();
+          return null;
+        } else {
+          return 'error';
+        }
+      };
+      return 'qualifier';
+    };
+    return null;
+  }
+
   function consumeName(s) {
     s.eatWhile(/[a-zA-Z0-9_-]/);
   }
@@ -355,7 +401,7 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
       consumeIdentifier(s);
       var id = s.current().trim();
       state.f = next;
-      if (id === 'true' || id === 'false') {
+      if (contains(id, builtins)) {
         return 'builtin';
       } else {
         return 'variable';
@@ -437,7 +483,7 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
       res = f.fn.apply(null, f.args.concat(args));
     }
 
-    console.log('call', f, res);
+    if (debug) console.log('call', f, res);
     return res;
   }
 
@@ -462,15 +508,15 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
         return null;
       }
 
-      console.log('----------------------------------------');
+      if (debug) console.log('----------------------------------------');
       var f = state.f;
       var res = call(state.f, s, state);
-      console.log('token:', '"' + s.current() + '" -> ' + res + ', "' + s.string + '", lastLineType:', state.lastLineType, f, state);
+      if (debug) console.log('token:', '"' + s.current() + '" -> ' + res + ', "' + s.string + '", lastLineType:', state.lastLineType, f, state);
       state.lastIndent = s.indentation();
       return res;
     },
     indent: function(state, line) {
-      console.log('indent', state, line, state);
+      if (debug) console.log('indent', state, line, state);
       if (state.lastLineType === 'choice-start' || state.lastLineType === 'branch' || state.lastLineType === 'choice-continued') {
         return state.lastIndent + indentUnit;
       }

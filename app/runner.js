@@ -8,9 +8,14 @@ var $runner = $('#runner'),
     $choiceListPanel = $('.runner-choices-panel'),
     Promise = require('bluebird');
 
+var authorEmotions = {};
+
 var formatters = {
   line: function(node) {
-    return '<div class="line-author">' + node.name + '</div>' +
+    emotion = node.name.emotion || authorEmotions[node.name.name] || '';
+    authorEmotions[node.name.name] = emotion;
+    if (emotion) emotion = '[' + emotion + ']';
+    return '<div class="line-author">' + node.name.name + ' ' + emotion + '</div>' +
       '<div class="line-content">' + node.content + '</div>';
   },
   'line choice': function(node) {
@@ -47,14 +52,16 @@ var processors = {
         }
       }).map(function(choice) {
         console.log('choice', choice);
+        var emotion = choice.emotion || '';
+        if (emotion) emotion = '[' + emotion + '] ';
         return $('<a></a>')
           .attr('href', '#')
-          .text(choice.content)
+          .text(emotion + choice.content)
           .on('click', function(e) {
             e.preventDefault();
             $choiceListPanel.hide();
             $choiceList.empty();
-            addMessage({type: 'line choice', name: node.name, content: choice.content, choice: true});
+            addMessage({type: 'line choice', name: {name: node.name.name, emotion: choice.emotion}, content: choice.content, choice: true});
             resolve(choice.next);
           });
       }).forEach(function($el) {
@@ -226,6 +233,7 @@ function clearRunner() {
   $runButton.show();
 
   state = {};
+  authorEmotions = {};
   updateState();
   $messageList.empty();
   $choiceList.empty();
