@@ -3,6 +3,10 @@ require! {
   'fs'
 }
 
+EOL = \\n
+match-EOL = /\r\n|\r|\n/
+match-EOL-global = /\r\n|\r|\n/g
+
 module.exports = class Parser
   parse-default: ->
     @parse-dialogue 0, allow-sections: true
@@ -18,7 +22,7 @@ module.exports = class Parser
       switch
       | @ch! is \# and allow-sections =>
         if return-on-section then return lines else lines[*] = @parse-section!
-      | @ch! is \\n => @next!
+      | @ch!.match match-EOL => @next!
       | otherwise => lines[*] = @parse-statement!
 
       @consume /\s/
@@ -35,7 +39,7 @@ module.exports = class Parser
   parse-line-or-choice: ->
     name = @parse-name!
     @consume ' '
-    if @ch! is \\n
+    if @ch!.match match-EOL
       if name.emotion then throw "[parse-line-or-choice] Name shouldn't include emotion"
       @next!
       choices = @parse-choice-list!
@@ -114,7 +118,7 @@ module.exports = class Parser
         next = @parse-identifier!
       else
         @consume ' '
-        if @ch! is \\n
+        if @ch!.match match-EOL
           @next!
           next = @parse-dialogue!
         else throw "[parse-choice] Unexpected '#{@ch!}', expected newline"
@@ -126,7 +130,7 @@ module.exports = class Parser
           @consume ' '
           next = @parse-identifier!
           break
-        else if @ch! is \\n
+        else if @ch!.match match-EOL
           @next!
           next = @parse-dialogue!
           break
@@ -156,7 +160,7 @@ module.exports = class Parser
   parse-instruction-set: ->
     variable = @parse-identifier!
     @consume ' '
-    if @ch! is \\n then return {type: \set, op: \=, value: true, variable}
+    if @ch!.match match-EOL then return {type: \set, op: \=, value: true, variable}
     op = @consume /[\=\-\+\?]/
     if op not in <[ = -= += ?= ]> then throw "Unknown set operation: '#op'"
     @consume ' '
@@ -315,7 +319,7 @@ module.exports = class Parser
     string
 
   parse-line-string: ->
-    string = @consume /[^\n]/
+    string = @consume /[^\n\r]/
     @next!
     string
 
@@ -365,7 +369,7 @@ module.exports = class Parser
     for i from 0 til at
       if indenting and @source[i].match /[ \t]/
         indent-level++
-      else if @source[i] is \\n
+      else if @source[i].match match-EOL
         indent-level = 0
         indenting = true
       else indenting = false
@@ -379,7 +383,7 @@ module.exports = class Parser
     char = 0
     for i from 0 til at
       char++
-      if @source[i] is \\n
+      if @source[i].match match-EOL
         line++
         char = 0
 
@@ -388,7 +392,7 @@ module.exports = class Parser
   log-pos: (msg = '', at = @pos) ->
     [line, char] = @line-ch at
     """
-    At line #line, character #{char + 1}: '#{@ch!.replace '\n' '\\n'}'
-    #{(@source.split \\n)[line - 1]}
+    At line #line, character #{char + 1}: '#{@ch!.replace match-EOL-global, '\\n'}'
+    #{(@source.split match-EOL)[line - 1]}
     #{replicate(char, '~').join ''}^ #{msg}
     """

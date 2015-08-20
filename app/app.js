@@ -114,7 +114,7 @@ function saveFile(as) {
     }
   }
 
-  originalFile = codemirror.getValue();
+  originalFile = codemirror.getValue().replace(/\r\n|\r/g, '\n');
   fs.writeFileSync(fileName, originalFile, {encoding: 'utf-8'});
   app.addRecentDocument(fileName);
   change();
