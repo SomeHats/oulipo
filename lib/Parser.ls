@@ -329,7 +329,7 @@ module.exports = class Parser
 
   # Utilities:
   parse: (source) ->
-    @source = source
+    @source = source.replace /\r\n|\r/, \\n
     @pos = 0
 
     try
