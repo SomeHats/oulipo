@@ -381,7 +381,7 @@ module.exports = class Parser
   line-ch: (at = @pos) ->
     line = 1
     char = 0
-    for i from 0 til at
+    for i from 0 til Math.min @source.length - 1, at
       char++
       if @source[i].match match-EOL
         line++
