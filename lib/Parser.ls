@@ -335,6 +335,7 @@ module.exports = class Parser
     try
       return @parse-default!
     catch e
+      console.log e.stack if e.stack
       throw new Error @log-pos(e.message || e)
 
   ch: -> @source[@pos] or '\n'
