@@ -339,18 +339,20 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
 
   function parseEmotion(next, s, state) {
     state.f = function(s, state) {
-      consumeName(s);
+      var result = parseValue(state.f, s, state);
       s.eatSpace();
-      state.f = function(s, state) {
-        state.f = next;
-        if (s.next() === ']') {
-          s.eatSpace();
-          return null;
-        } else {
-          return 'error';
-        }
-      };
-      return 'qualifier';
+      if (s.peek() === ']') {
+        state.f = function(s, state) {
+          state.f = next;
+          if (s.next() === ']') {
+            s.eatSpace();
+            return null;
+          } else {
+            return 'error';
+          }
+        };
+      }
+      return result;
     };
     return null;
   }

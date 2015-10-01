@@ -40,7 +40,7 @@ module.exports = class Parser
     name = @parse-name!
     @consume ' '
     if @ch!.match match-EOL
-      if name.emotion then throw "[parse-line-or-choice] Name shouldn't include emotion"
+      if name.annotations then throw "[parse-line-or-choice] Name shouldn't include annotations"
       @next!
       choices = @parse-choice-list!
       {type: \choice, name, choices}
@@ -101,9 +101,9 @@ module.exports = class Parser
     if @ch! is \[
       @next!
       @consume ' '
-      emotion = @consume /[a-zA-Z0-9_-]/
+      annotations = @parse-annotations!
       @consume ' '
-      if emotion.length is 0 then throw "[parse-choice] Expected emotion, got #{@ch!}"
+      if annotations.length is 0 then throw "[parse-choice] Expected annotations, got #{@ch!}"
       if @ch! is \]
         @next!
         @consume ' '
@@ -138,7 +138,7 @@ module.exports = class Parser
           content += @ch!
           @next!
 
-    {content, next, condition, emotion}
+    {content, next, condition, annotations}
 
   parse-condition: ->
     @next! # skip over opening '('
@@ -274,12 +274,11 @@ module.exports = class Parser
     @consume ' '
     if name.length is 0 then throw "Expexted name, got #{@ch!}"
     if @ch! is '['
-      # emotion
       @next!
       @consume ' '
-      emotion = @consume /[a-zA-Z0-9_-]/
+      annotations = @parse-annotations!
       @consume ' '
-      if emotion.length is 0 then throw "Expected emotion, got #{@ch!}"
+      if annotations.length is 0 then throw "Expected annotations, got #{@ch!}"
       if @ch! is ']'
         @next!
         @consume ' '
@@ -287,8 +286,20 @@ module.exports = class Parser
 
     if @ch! is ':'
       @next!
-      return {name, emotion}
+      console.log {name, annotations}
+      return {name, annotations}
     else throw "Expected ':', got #{@ch!}"
+
+  parse-annotations: ->
+    @consume ' '
+    annotations = []
+    while @ch! isnt ']'
+      annotations[*] = @parse-value!
+      @consume ' '
+
+    console.log '[parse-annotations]' annotations
+
+    annotations
 
   parse-value: ->
     | @ch!.match /[0-9\-\.]/ => @parse-number!
@@ -324,12 +335,13 @@ module.exports = class Parser
     string
 
   parse-identifier: ->
-    res = @match /^[a-zA-Z_][a-zA-Z0-9_\-\.]*/, true
+    res = @match /^[a-zA-Z_][a-zA-Z0-9_\-\.\:]*/, true
     res
 
   # Utilities:
   parse: (source) ->
     @source = source.replace /\r\n|\r/, \\n
+    @source += \\n
     @pos = 0
 
     try
