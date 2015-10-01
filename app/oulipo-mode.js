@@ -448,7 +448,7 @@ CodeMirror.defineMode('oulipo', function(cmCfg, modeCfg) {
   }
 
   function consumeIdentifier(s) {
-    return s.eatWhile(/[a-zA-Z0-9\.\-\_]/);
+    return s.eatWhile(/[a-zA-Z0-9\.\-\_\:]/);
   }
 
   function endLine(next) {
