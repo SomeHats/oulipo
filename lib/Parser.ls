@@ -286,7 +286,6 @@ module.exports = class Parser
 
     if @ch! is ':'
       @next!
-      console.log {name, annotations}
       return {name, annotations}
     else throw "Expected ':', got #{@ch!}"
 
@@ -296,8 +295,6 @@ module.exports = class Parser
     while @ch! isnt ']'
       annotations[*] = @parse-value!
       @consume ' '
-
-    console.log '[parse-annotations]' annotations
 
     annotations
 
