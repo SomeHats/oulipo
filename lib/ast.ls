@@ -1,5 +1,4 @@
 require! {
-  'node-uuid': uuid
   'prelude-ls': {id, partition}
 }
 
@@ -62,14 +61,15 @@ export prepare = (ast, existing-sections = []) ->
   nodes.0
 
 export flatten = (ast) ->
-  nodes = {}
+  nodes = []
 
   walk ast, (node) ->
     if node.type
-      node._id = uuid.v4!
-      nodes[node._id] = node
+      id = nodes.length
+      node._id = id
+      nodes[id] = node
 
-  for id, node of nodes
+  for node, id in nodes
     if node.next then node.next = node.next._id
     if typeof! node.choices is \Array
       for choice in node.choices when typeof choice.next is \object

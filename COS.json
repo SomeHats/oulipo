@@ -1,43 +1,43 @@
 {
-  "start": "5f40a423-fdf6-4a04-8ee7-211c3312fdb4",
-  "nodes": {
-    "5f40a423-fdf6-4a04-8ee7-211c3312fdb4": {
+  "start": 0,
+  "nodes": [
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "COS",
-      "next": "db436073-6c3d-4dc8-8bb8-be883dbee89a",
-      "_id": "5f40a423-fdf6-4a04-8ee7-211c3312fdb4"
+      "next": 1,
+      "_id": 0
     },
-    "db436073-6c3d-4dc8-8bb8-be883dbee89a": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "A half-true story about half-truths.",
-      "next": "276dbe61-4ae7-4d38-8ecb-d0ca0bb69bf3",
-      "_id": "db436073-6c3d-4dc8-8bb8-be883dbee89a"
+      "next": 2,
+      "_id": 1
     },
-    "276dbe61-4ae7-4d38-8ecb-d0ca0bb69bf3": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Hey there, player. Glad to have you for the next 20 minutes, I guess.",
-      "next": "ee1b86fd-507f-4708-8a0e-e6a895c417ed",
-      "_id": "276dbe61-4ae7-4d38-8ecb-d0ca0bb69bf3"
+      "next": 3,
+      "_id": 2
     },
-    "ee1b86fd-507f-4708-8a0e-e6a895c417ed": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "What would you like to do now?",
-      "next": "79cb8def-6888-4ab0-bfaf-65bfb72c8ab3",
-      "_id": "ee1b86fd-507f-4708-8a0e-e6a895c417ed"
+      "next": 4,
+      "_id": 3
     },
-    "79cb8def-6888-4ab0-bfaf-65bfb72c8ab3": {
+    {
       "type": "choice",
       "name": {
         "name": "Player"
@@ -45,21 +45,21 @@
       "choices": [
         {
           "content": "Let's play this thing! ",
-          "next": "49a29c99-0611-4c95-8c4f-77bec93eea8c"
+          "next": 5
         },
         {
           "content": "Who are you? ",
-          "next": "3d0e78c6-fa33-4134-86d4-172b81bc3248"
+          "next": 110
         },
         {
           "content": "Hm, tell me more. ",
-          "next": "b1501090-349b-47c4-9bbf-19763e2256c0"
+          "next": 136
         }
       ],
       "next": null,
-      "_id": "79cb8def-6888-4ab0-bfaf-65bfb72c8ab3"
+      "_id": 4
     },
-    "49a29c99-0611-4c95-8c4f-77bec93eea8c": {
+    {
       "type": "branch",
       "branches": [
         {
@@ -72,16 +72,16 @@
                 "left": {
                   "type": "identifier",
                   "val": "asked-about",
-                  "_id": "b2c0bc5a-594f-43b7-b7f9-eadfb076afef"
+                  "_id": 8
                 },
                 "right": {
                   "type": "identifier",
                   "val": "asked-credits",
-                  "_id": "c012e653-c114-4a68-8cb6-6df9ddb2c8e5"
+                  "_id": 9
                 },
-                "_id": "3cf3407c-ceb4-4c38-a4a6-d8bc64ad27ef"
+                "_id": 7
               },
-              "_id": "ff1479b6-76a3-4991-915d-ac7e2a7685e8"
+              "_id": 6
             },
             "is": false
           },
@@ -91,8 +91,8 @@
               "name": "N"
             },
             "content": "Jumping right into it! Great!",
-            "next": "4c2d7f0d-d225-4f1b-b0d3-58b73d169b1a",
-            "_id": "43476bf7-de2b-42c7-8ade-15fe8e49aef8"
+            "next": 11,
+            "_id": 10
           }
         },
         {
@@ -105,16 +105,16 @@
                 "left": {
                   "type": "identifier",
                   "val": "asked-about",
-                  "_id": "5455f738-4b82-4c43-9399-3a361910c559"
+                  "_id": 100
                 },
                 "right": {
                   "type": "identifier",
                   "val": "asked-credits",
-                  "_id": "33f5a44c-6930-4097-93f6-b108b88a864c"
+                  "_id": 101
                 },
-                "_id": "7975f2ed-285c-43f9-a6f7-26ddeb3c6121"
+                "_id": 99
               },
-              "_id": "55bafe7b-9363-46a0-bc44-c814f1b3c280"
+              "_id": 98
             },
             "is": true
           },
@@ -124,8 +124,8 @@
               "name": "Player"
             },
             "content": ". . .",
-            "next": "38706ad6-99a7-4dde-bb25-daf730445305",
-            "_id": "193502e6-b31f-470d-a09f-fa3921f603c9"
+            "next": 103,
+            "_id": 102
           }
         },
         {
@@ -138,16 +138,16 @@
                 "left": {
                   "type": "identifier",
                   "val": "asked-about",
-                  "_id": "f3aa16d2-02ab-47b5-929f-5a4be56cd95b"
+                  "_id": 107
                 },
                 "right": {
                   "type": "identifier",
                   "val": "asked-credits",
-                  "_id": "aa7a65c6-442d-413d-90b5-e8922bfd3891"
+                  "_id": 108
                 },
-                "_id": "e82d306e-2038-41a0-a18b-750925af0180"
+                "_id": 106
               },
-              "_id": "57480ff6-73af-45d1-83c2-67f32f258bbc"
+              "_id": 105
             },
             "is": true
           },
@@ -157,15 +157,15 @@
               "name": "N"
             },
             "content": "Yes, let's!",
-            "next": "0c3dc6ef-d60a-4823-b76c-9724e2da157d",
-            "_id": "514e64e2-f4ae-4bff-ac14-34103791153c"
+            "next": 14,
+            "_id": 109
           }
         }
       ],
-      "next": "0c3dc6ef-d60a-4823-b76c-9724e2da157d",
-      "_id": "49a29c99-0611-4c95-8c4f-77bec93eea8c"
+      "next": 14,
+      "_id": 5
     },
-    "ff1479b6-76a3-4991-915d-ac7e2a7685e8": {
+    {
       "type": "expression",
       "exp": {
         "type": "operator",
@@ -173,115 +173,115 @@
         "left": {
           "type": "identifier",
           "val": "asked-about",
-          "_id": "b2c0bc5a-594f-43b7-b7f9-eadfb076afef"
+          "_id": 8
         },
         "right": {
           "type": "identifier",
           "val": "asked-credits",
-          "_id": "c012e653-c114-4a68-8cb6-6df9ddb2c8e5"
+          "_id": 9
         },
-        "_id": "3cf3407c-ceb4-4c38-a4a6-d8bc64ad27ef"
+        "_id": 7
       },
-      "_id": "ff1479b6-76a3-4991-915d-ac7e2a7685e8"
+      "_id": 6
     },
-    "3cf3407c-ceb4-4c38-a4a6-d8bc64ad27ef": {
+    {
       "type": "operator",
       "op": "|",
       "left": {
         "type": "identifier",
         "val": "asked-about",
-        "_id": "b2c0bc5a-594f-43b7-b7f9-eadfb076afef"
+        "_id": 8
       },
       "right": {
         "type": "identifier",
         "val": "asked-credits",
-        "_id": "c012e653-c114-4a68-8cb6-6df9ddb2c8e5"
+        "_id": 9
       },
-      "_id": "3cf3407c-ceb4-4c38-a4a6-d8bc64ad27ef"
+      "_id": 7
     },
-    "b2c0bc5a-594f-43b7-b7f9-eadfb076afef": {
+    {
       "type": "identifier",
       "val": "asked-about",
-      "_id": "b2c0bc5a-594f-43b7-b7f9-eadfb076afef"
+      "_id": 8
     },
-    "c012e653-c114-4a68-8cb6-6df9ddb2c8e5": {
+    {
       "type": "identifier",
       "val": "asked-credits",
-      "_id": "c012e653-c114-4a68-8cb6-6df9ddb2c8e5"
+      "_id": 9
     },
-    "43476bf7-de2b-42c7-8ade-15fe8e49aef8": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Jumping right into it! Great!",
-      "next": "4c2d7f0d-d225-4f1b-b0d3-58b73d169b1a",
-      "_id": "43476bf7-de2b-42c7-8ade-15fe8e49aef8"
+      "next": 11,
+      "_id": 10
     },
-    "4c2d7f0d-d225-4f1b-b0d3-58b73d169b1a": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "No messing around with reading the About Me or the About This Game sections or--",
-      "next": "f4b04c79-b5e3-4378-9884-cc894e8eb78b",
-      "_id": "4c2d7f0d-d225-4f1b-b0d3-58b73d169b1a"
+      "next": 12,
+      "_id": 11
     },
-    "f4b04c79-b5e3-4378-9884-cc894e8eb78b": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "Shush.",
-      "next": "fe211d24-9c61-4e57-8818-caa99c77df99",
-      "_id": "f4b04c79-b5e3-4378-9884-cc894e8eb78b"
+      "next": 13,
+      "_id": 12
     },
-    "fe211d24-9c61-4e57-8818-caa99c77df99": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Fine, fine.",
-      "next": "0c3dc6ef-d60a-4823-b76c-9724e2da157d",
-      "_id": "fe211d24-9c61-4e57-8818-caa99c77df99"
+      "next": 14,
+      "_id": 13
     },
-    "0c3dc6ef-d60a-4823-b76c-9724e2da157d": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Let's travel back five years ago, to 2010...",
-      "next": "922645e1-b80c-4450-a149-458a1936f481",
-      "_id": "0c3dc6ef-d60a-4823-b76c-9724e2da157d"
+      "next": 15,
+      "_id": 14
     },
-    "922645e1-b80c-4450-a149-458a1936f481": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "That was FIVE years ago?!",
-      "next": "b4ed2e17-af0c-45b1-b0ce-c5e008f611fb",
-      "_id": "922645e1-b80c-4450-a149-458a1936f481"
+      "next": 16,
+      "_id": 15
     },
-    "b4ed2e17-af0c-45b1-b0ce-c5e008f611fb": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "...to the evening that changed my life forever.",
-      "next": "3a0b7b0d-b074-495e-b515-cbb8c7518e7d",
-      "_id": "b4ed2e17-af0c-45b1-b0ce-c5e008f611fb"
+      "next": 17,
+      "_id": 16
     },
-    "3a0b7b0d-b074-495e-b515-cbb8c7518e7d": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Tell me, dear player, how do you think this all ends?",
-      "next": "78484e8d-aa0f-47d7-a87e-d3671ed4ec3b",
-      "_id": "3a0b7b0d-b074-495e-b515-cbb8c7518e7d"
+      "next": 18,
+      "_id": 17
     },
-    "78484e8d-aa0f-47d7-a87e-d3671ed4ec3b": {
+    {
       "type": "choice",
       "name": {
         "name": "Player"
@@ -289,56 +289,56 @@
       "choices": [
         {
           "content": "With flowers and rainbows and gay unicorns?",
-          "next": "6e7de098-1944-43d5-8ca3-65f571a9046c"
+          "next": 19
         },
         {
           "content": "Apparently, with you redditing at Starbucks.",
-          "next": "d208c040-4ab0-49de-a39c-94452712c244"
+          "next": 87
         },
         {
           "content": "IT ALL ENDS IN BLOOD",
-          "next": "101516f0-3cad-4907-9510-e8de6540d8fb"
+          "next": 93
         }
       ],
-      "next": "a12ccf1f-ac48-41f6-a357-e107d25dfbd1",
-      "_id": "78484e8d-aa0f-47d7-a87e-d3671ed4ec3b"
+      "next": 23,
+      "_id": 18
     },
-    "6e7de098-1944-43d5-8ca3-65f571a9046c": {
+    {
       "type": "set",
       "variable": "main-menu-convo-1",
       "op": "=",
       "value": 1,
-      "next": "e30fb5bf-fdb9-4506-9860-6f251447d9f9",
-      "_id": "6e7de098-1944-43d5-8ca3-65f571a9046c"
+      "next": 20,
+      "_id": 19
     },
-    "e30fb5bf-fdb9-4506-9860-6f251447d9f9": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Yes. That is exactly how this game ends.",
-      "next": "e99caa84-464c-4edc-b405-7da9efd07cd7",
-      "_id": "e30fb5bf-fdb9-4506-9860-6f251447d9f9"
+      "next": 21,
+      "_id": 20
     },
-    "e99caa84-464c-4edc-b405-7da9efd07cd7": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "Really?",
-      "next": "d5ee9c4f-07d5-4cc8-8fb9-5f0fa459fedf",
-      "_id": "e99caa84-464c-4edc-b405-7da9efd07cd7"
+      "next": 22,
+      "_id": 21
     },
-    "d5ee9c4f-07d5-4cc8-8fb9-5f0fa459fedf": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "No.",
-      "next": "a12ccf1f-ac48-41f6-a357-e107d25dfbd1",
-      "_id": "d5ee9c4f-07d5-4cc8-8fb9-5f0fa459fedf"
+      "next": 23,
+      "_id": 22
     },
-    "a12ccf1f-ac48-41f6-a357-e107d25dfbd1": {
+    {
       "type": "branch",
       "branches": [
         {
@@ -348,9 +348,9 @@
               "exp": {
                 "type": "identifier",
                 "val": "asked-about",
-                "_id": "01724a46-8612-4198-abfd-ef7b4d88f848"
+                "_id": 25
               },
-              "_id": "8200e263-1193-46c3-93a0-ce0206325ea5"
+              "_id": 24
             },
             "is": true
           },
@@ -360,8 +360,8 @@
               "name": "N"
             },
             "content": "If you didn't skip the About This Game section, you'd know this is a very personal story.",
-            "next": "02112486-48ba-4415-ae44-d4f688ce8f64",
-            "_id": "99ca8644-6c6b-40e3-8f9b-237d03380908"
+            "next": 27,
+            "_id": 26
           }
         },
         {
@@ -369,7 +369,7 @@
             "expression": {
               "type": "expression",
               "exp": [],
-              "_id": "0b252f78-fb84-4d5a-860b-9b3f5d8b24cc"
+              "_id": 85
             },
             "is": {
               "default": true
@@ -377,83 +377,83 @@
           },
           "next": {
             "type": "continue",
-            "next": "1d718e91-f86c-4b35-bd14-dd161e751a46",
-            "_id": "114dd92f-f2ac-45ed-a97b-28f5718f93be"
+            "next": 28,
+            "_id": 86
           }
         }
       ],
-      "next": "1d718e91-f86c-4b35-bd14-dd161e751a46",
-      "_id": "a12ccf1f-ac48-41f6-a357-e107d25dfbd1"
+      "next": 28,
+      "_id": 23
     },
-    "8200e263-1193-46c3-93a0-ce0206325ea5": {
+    {
       "type": "expression",
       "exp": {
         "type": "identifier",
         "val": "asked-about",
-        "_id": "01724a46-8612-4198-abfd-ef7b4d88f848"
+        "_id": 25
       },
-      "_id": "8200e263-1193-46c3-93a0-ce0206325ea5"
+      "_id": 24
     },
-    "01724a46-8612-4198-abfd-ef7b4d88f848": {
+    {
       "type": "identifier",
       "val": "asked-about",
-      "_id": "01724a46-8612-4198-abfd-ef7b4d88f848"
+      "_id": 25
     },
-    "99ca8644-6c6b-40e3-8f9b-237d03380908": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "If you didn't skip the About This Game section, you'd know this is a very personal story.",
-      "next": "02112486-48ba-4415-ae44-d4f688ce8f64",
-      "_id": "99ca8644-6c6b-40e3-8f9b-237d03380908"
+      "next": 27,
+      "_id": 26
     },
-    "02112486-48ba-4415-ae44-d4f688ce8f64": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "Shush.",
-      "next": "1d718e91-f86c-4b35-bd14-dd161e751a46",
-      "_id": "02112486-48ba-4415-ae44-d4f688ce8f64"
+      "next": 28,
+      "_id": 27
     },
-    "1d718e91-f86c-4b35-bd14-dd161e751a46": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "This game includes dialogue that I, my parents, and my ex-boyfriend actually said.",
-      "next": "04c20027-0f25-402d-90f5-4823bcb22a66",
-      "_id": "1d718e91-f86c-4b35-bd14-dd161e751a46"
+      "next": 29,
+      "_id": 28
     },
-    "04c20027-0f25-402d-90f5-4823bcb22a66": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "As well as all the things we could have, should have, and never would have said.",
-      "next": "37d6ef75-3392-4504-b664-1bc5250fdc9a",
-      "_id": "04c20027-0f25-402d-90f5-4823bcb22a66"
+      "next": 30,
+      "_id": 29
     },
-    "37d6ef75-3392-4504-b664-1bc5250fdc9a": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "It doesn't matter which is which.",
-      "next": "e68e366c-edb4-4cf5-bf8c-539952f387ba",
-      "_id": "37d6ef75-3392-4504-b664-1bc5250fdc9a"
+      "next": 31,
+      "_id": 30
     },
-    "e68e366c-edb4-4cf5-bf8c-539952f387ba": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Not anymore.",
-      "next": "b9f7681c-de21-4459-884a-106a6c14a17b",
-      "_id": "e68e366c-edb4-4cf5-bf8c-539952f387ba"
+      "next": 32,
+      "_id": 31
     },
-    "b9f7681c-de21-4459-884a-106a6c14a17b": {
+    {
       "type": "choice",
       "name": {
         "name": "Player"
@@ -461,56 +461,56 @@
       "choices": [
         {
           "content": "How can I win a game with no right answers?",
-          "next": "cc1da89b-fd56-4d7f-b0ce-501f8ebb0a6c"
+          "next": 33
         },
         {
           "content": "You're a bit of a downer, aren't you?",
-          "next": "83d849b4-12ea-4f54-8349-07895c746659"
+          "next": 79
         },
         {
           "content": "This 'true' game is full of lies?",
-          "next": "13971547-bec5-44ef-9c75-90e469e505a0"
+          "next": 82
         }
       ],
-      "next": "b29615d0-04b8-466d-83b7-ff7b7f80c5b4",
-      "_id": "b9f7681c-de21-4459-884a-106a6c14a17b"
+      "next": 36,
+      "_id": 32
     },
-    "cc1da89b-fd56-4d7f-b0ce-501f8ebb0a6c": {
+    {
       "type": "set",
       "variable": "main-menu-convo-2",
       "op": "=",
       "value": 2,
-      "next": "b6edfebd-9a45-4e9d-8f40-7ea9ba8aa857",
-      "_id": "cc1da89b-fd56-4d7f-b0ce-501f8ebb0a6c"
+      "next": 34,
+      "_id": 33
     },
-    "b6edfebd-9a45-4e9d-8f40-7ea9ba8aa857": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Exactly.",
-      "next": "bf68d757-f475-4191-8475-8ecdb42c9e44",
-      "_id": "b6edfebd-9a45-4e9d-8f40-7ea9ba8aa857"
+      "next": 35,
+      "_id": 34
     },
-    "bf68d757-f475-4191-8475-8ecdb42c9e44": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": ". . .",
-      "next": "b29615d0-04b8-466d-83b7-ff7b7f80c5b4",
-      "_id": "bf68d757-f475-4191-8475-8ecdb42c9e44"
+      "next": 36,
+      "_id": 35
     },
-    "b29615d0-04b8-466d-83b7-ff7b7f80c5b4": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "You'll be playing as me, circa 2010.",
-      "next": "8618343f-c01a-4aac-ac06-094db6d07b62",
-      "_id": "b29615d0-04b8-466d-83b7-ff7b7f80c5b4"
+      "next": 37,
+      "_id": 36
     },
-    "8618343f-c01a-4aac-ac06-094db6d07b62": {
+    {
       "type": "branch",
       "branches": [
         {
@@ -520,9 +520,9 @@
               "exp": {
                 "type": "identifier",
                 "val": "asked-about",
-                "_id": "93ee820b-a7fb-4882-a57c-e68c661d1302"
+                "_id": 39
               },
-              "_id": "3b74c9ee-fae0-4a3b-bf18-5ab4406f4016"
+              "_id": 38
             },
             "is": true
           },
@@ -532,8 +532,8 @@
               "name": "N"
             },
             "content": "Because you skipped the About Me, my (not-yet-legal) name is Nicky Case. Just so you know.",
-            "next": "d2855ce9-2bd1-4e42-967a-21cd68c69a34",
-            "_id": "8bff7ee0-6fd4-438c-89ab-ec6ffd27ed10"
+            "next": 41,
+            "_id": 40
           }
         },
         {
@@ -541,7 +541,7 @@
             "expression": {
               "type": "expression",
               "exp": [],
-              "_id": "9b7a157d-804d-4712-b1f8-432e05a84582"
+              "_id": 77
             },
             "is": {
               "default": true
@@ -549,47 +549,47 @@
           },
           "next": {
             "type": "continue",
-            "next": "2fa1e6c1-4dfe-4d76-bd7e-b052d9a84db3",
-            "_id": "a13d3678-d576-4764-8361-a0b66d0bbfad"
+            "next": 42,
+            "_id": 78
           }
         }
       ],
-      "next": "2fa1e6c1-4dfe-4d76-bd7e-b052d9a84db3",
-      "_id": "8618343f-c01a-4aac-ac06-094db6d07b62"
+      "next": 42,
+      "_id": 37
     },
-    "3b74c9ee-fae0-4a3b-bf18-5ab4406f4016": {
+    {
       "type": "expression",
       "exp": {
         "type": "identifier",
         "val": "asked-about",
-        "_id": "93ee820b-a7fb-4882-a57c-e68c661d1302"
+        "_id": 39
       },
-      "_id": "3b74c9ee-fae0-4a3b-bf18-5ab4406f4016"
+      "_id": 38
     },
-    "93ee820b-a7fb-4882-a57c-e68c661d1302": {
+    {
       "type": "identifier",
       "val": "asked-about",
-      "_id": "93ee820b-a7fb-4882-a57c-e68c661d1302"
+      "_id": 39
     },
-    "8bff7ee0-6fd4-438c-89ab-ec6ffd27ed10": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Because you skipped the About Me, my (not-yet-legal) name is Nicky Case. Just so you know.",
-      "next": "d2855ce9-2bd1-4e42-967a-21cd68c69a34",
-      "_id": "8bff7ee0-6fd4-438c-89ab-ec6ffd27ed10"
+      "next": 41,
+      "_id": 40
     },
-    "d2855ce9-2bd1-4e42-967a-21cd68c69a34": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "Shush.",
-      "next": "2fa1e6c1-4dfe-4d76-bd7e-b052d9a84db3",
-      "_id": "d2855ce9-2bd1-4e42-967a-21cd68c69a34"
+      "next": 42,
+      "_id": 41
     },
-    "2fa1e6c1-4dfe-4d76-bd7e-b052d9a84db3": {
+    {
       "type": "branch",
       "branches": [
         {
@@ -602,16 +602,16 @@
                 "left": {
                   "type": "identifier",
                   "val": "main-menu-convo-1",
-                  "_id": "36eac78b-dbf0-4463-8292-c786a25f8307"
+                  "_id": 45
                 },
                 "right": {
                   "type": "number",
                   "val": 1,
-                  "_id": "de97fe6f-9af3-4eff-bba5-5c8a370bc8e2"
+                  "_id": 46
                 },
-                "_id": "9ec3b5c8-8c7b-41af-9801-04c63520a907"
+                "_id": 44
               },
-              "_id": "56079908-822a-41d3-905a-583fd93c294e"
+              "_id": 43
             },
             "is": true
           },
@@ -621,8 +621,8 @@
               "name": "N"
             },
             "content": "This game doesn't end with gay unicorns.",
-            "next": "380d53c2-1699-442e-bbdb-ad59cbe5037f",
-            "_id": "11de874d-d72e-4a47-97a9-b941df677d33"
+            "next": 48,
+            "_id": 47
           }
         },
         {
@@ -635,16 +635,16 @@
                 "left": {
                   "type": "identifier",
                   "val": "main-menu-convo-1",
-                  "_id": "98bf2b7c-2215-458d-b784-32023c7ecb79"
+                  "_id": 72
                 },
                 "right": {
                   "type": "number",
                   "val": 2,
-                  "_id": "a3c13ba5-fae3-47ef-895c-9db00eee608c"
+                  "_id": 73
                 },
-                "_id": "b435e978-d08a-435e-a245-7f1288ade0a3"
+                "_id": 71
               },
-              "_id": "c5f59e92-7566-4d29-a569-b3e390933d78"
+              "_id": 70
             },
             "is": true
           },
@@ -654,8 +654,8 @@
               "name": "N"
             },
             "content": "This game is a coming-out, a coming-of-age, a coming-to-terms. ",
-            "next": "380d53c2-1699-442e-bbdb-ad59cbe5037f",
-            "_id": "89d068df-0661-4793-8701-821321666cd1"
+            "next": 48,
+            "_id": 74
           }
         },
         {
@@ -663,7 +663,7 @@
             "expression": {
               "type": "expression",
               "exp": [],
-              "_id": "b34eff28-5871-413f-8cbf-330afa7cdf78"
+              "_id": 75
             },
             "is": {
               "default": true
@@ -675,15 +675,15 @@
               "name": "N"
             },
             "content": "This game ends not in blood, but in tears. ",
-            "next": "380d53c2-1699-442e-bbdb-ad59cbe5037f",
-            "_id": "2bb42f4e-3a85-450d-a01c-bbe50464aba6"
+            "next": 48,
+            "_id": 76
           }
         }
       ],
-      "next": "380d53c2-1699-442e-bbdb-ad59cbe5037f",
-      "_id": "2fa1e6c1-4dfe-4d76-bd7e-b052d9a84db3"
+      "next": 48,
+      "_id": 42
     },
-    "56079908-822a-41d3-905a-583fd93c294e": {
+    {
       "type": "expression",
       "exp": {
         "type": "operator",
@@ -691,52 +691,52 @@
         "left": {
           "type": "identifier",
           "val": "main-menu-convo-1",
-          "_id": "36eac78b-dbf0-4463-8292-c786a25f8307"
+          "_id": 45
         },
         "right": {
           "type": "number",
           "val": 1,
-          "_id": "de97fe6f-9af3-4eff-bba5-5c8a370bc8e2"
+          "_id": 46
         },
-        "_id": "9ec3b5c8-8c7b-41af-9801-04c63520a907"
+        "_id": 44
       },
-      "_id": "56079908-822a-41d3-905a-583fd93c294e"
+      "_id": 43
     },
-    "9ec3b5c8-8c7b-41af-9801-04c63520a907": {
+    {
       "type": "operator",
       "op": "==",
       "left": {
         "type": "identifier",
         "val": "main-menu-convo-1",
-        "_id": "36eac78b-dbf0-4463-8292-c786a25f8307"
+        "_id": 45
       },
       "right": {
         "type": "number",
         "val": 1,
-        "_id": "de97fe6f-9af3-4eff-bba5-5c8a370bc8e2"
+        "_id": 46
       },
-      "_id": "9ec3b5c8-8c7b-41af-9801-04c63520a907"
+      "_id": 44
     },
-    "36eac78b-dbf0-4463-8292-c786a25f8307": {
+    {
       "type": "identifier",
       "val": "main-menu-convo-1",
-      "_id": "36eac78b-dbf0-4463-8292-c786a25f8307"
+      "_id": 45
     },
-    "de97fe6f-9af3-4eff-bba5-5c8a370bc8e2": {
+    {
       "type": "number",
       "val": 1,
-      "_id": "de97fe6f-9af3-4eff-bba5-5c8a370bc8e2"
+      "_id": 46
     },
-    "11de874d-d72e-4a47-97a9-b941df677d33": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "This game doesn't end with gay unicorns.",
-      "next": "380d53c2-1699-442e-bbdb-ad59cbe5037f",
-      "_id": "11de874d-d72e-4a47-97a9-b941df677d33"
+      "next": 48,
+      "_id": 47
     },
-    "380d53c2-1699-442e-bbdb-ad59cbe5037f": {
+    {
       "type": "branch",
       "branches": [
         {
@@ -749,16 +749,16 @@
                 "left": {
                   "type": "identifier",
                   "val": "main-menu-convo-2",
-                  "_id": "4cec4ba3-ba34-4a19-a052-856b1047492c"
+                  "_id": 51
                 },
                 "right": {
                   "type": "number",
                   "val": 1,
-                  "_id": "7dd5d3ad-418b-453e-9521-12630c4d2e60"
+                  "_id": 52
                 },
-                "_id": "02426dd0-61d7-4b04-9d12-a0dd11460d2b"
+                "_id": 50
               },
-              "_id": "5bd7c5de-a1bd-4f40-b778-1844090de389"
+              "_id": 49
             },
             "is": true
           },
@@ -768,8 +768,8 @@
               "name": "N"
             },
             "content": "Sorry for being a bit of a downer.",
-            "next": "c5b5e75d-ec3c-4c3e-ae4b-f75c26bb3fad",
-            "_id": "ad2d0f1e-4bd9-4052-ac15-95272678ed35"
+            "next": 54,
+            "_id": 53
           }
         },
         {
@@ -782,16 +782,16 @@
                 "left": {
                   "type": "identifier",
                   "val": "main-menu-convo-2",
-                  "_id": "b8e165e0-28c1-4c6b-a120-3818e8aa2be6"
+                  "_id": 65
                 },
                 "right": {
                   "type": "number",
                   "val": 2,
-                  "_id": "83bb8d25-28b1-4572-b3d1-8daeb348b344"
+                  "_id": 66
                 },
-                "_id": "65a45858-0552-454d-a675-a70b2476c0fa"
+                "_id": 64
               },
-              "_id": "0ea5786d-d03d-4e05-a7f7-49207aba25d4"
+              "_id": 63
             },
             "is": true
           },
@@ -801,8 +801,8 @@
               "name": "N"
             },
             "content": "And there are no right answers.",
-            "next": "c5b5e75d-ec3c-4c3e-ae4b-f75c26bb3fad",
-            "_id": "884d2c2a-c5f3-40c5-94b8-a661bbb370da"
+            "next": 54,
+            "_id": 67
           }
         },
         {
@@ -810,7 +810,7 @@
             "expression": {
               "type": "expression",
               "exp": [],
-              "_id": "c254aaf8-0c83-4f5d-9038-18b082935292"
+              "_id": 68
             },
             "is": {
               "default": true
@@ -822,15 +822,15 @@
               "name": "N"
             },
             "content": "And it's full of lies.",
-            "next": "c5b5e75d-ec3c-4c3e-ae4b-f75c26bb3fad",
-            "_id": "b0a05a9e-5ae2-4b88-b9f4-df046971545b"
+            "next": 54,
+            "_id": 69
           }
         }
       ],
-      "next": "c5b5e75d-ec3c-4c3e-ae4b-f75c26bb3fad",
-      "_id": "380d53c2-1699-442e-bbdb-ad59cbe5037f"
+      "next": 54,
+      "_id": 48
     },
-    "5bd7c5de-a1bd-4f40-b778-1844090de389": {
+    {
       "type": "expression",
       "exp": {
         "type": "operator",
@@ -838,133 +838,133 @@
         "left": {
           "type": "identifier",
           "val": "main-menu-convo-2",
-          "_id": "4cec4ba3-ba34-4a19-a052-856b1047492c"
+          "_id": 51
         },
         "right": {
           "type": "number",
           "val": 1,
-          "_id": "7dd5d3ad-418b-453e-9521-12630c4d2e60"
+          "_id": 52
         },
-        "_id": "02426dd0-61d7-4b04-9d12-a0dd11460d2b"
+        "_id": 50
       },
-      "_id": "5bd7c5de-a1bd-4f40-b778-1844090de389"
+      "_id": 49
     },
-    "02426dd0-61d7-4b04-9d12-a0dd11460d2b": {
+    {
       "type": "operator",
       "op": "==",
       "left": {
         "type": "identifier",
         "val": "main-menu-convo-2",
-        "_id": "4cec4ba3-ba34-4a19-a052-856b1047492c"
+        "_id": 51
       },
       "right": {
         "type": "number",
         "val": 1,
-        "_id": "7dd5d3ad-418b-453e-9521-12630c4d2e60"
+        "_id": 52
       },
-      "_id": "02426dd0-61d7-4b04-9d12-a0dd11460d2b"
+      "_id": 50
     },
-    "4cec4ba3-ba34-4a19-a052-856b1047492c": {
+    {
       "type": "identifier",
       "val": "main-menu-convo-2",
-      "_id": "4cec4ba3-ba34-4a19-a052-856b1047492c"
+      "_id": 51
     },
-    "7dd5d3ad-418b-453e-9521-12630c4d2e60": {
+    {
       "type": "number",
       "val": 1,
-      "_id": "7dd5d3ad-418b-453e-9521-12630c4d2e60"
+      "_id": 52
     },
-    "ad2d0f1e-4bd9-4052-ac15-95272678ed35": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Sorry for being a bit of a downer.",
-      "next": "c5b5e75d-ec3c-4c3e-ae4b-f75c26bb3fad",
-      "_id": "ad2d0f1e-4bd9-4052-ac15-95272678ed35"
+      "next": 54,
+      "_id": 53
     },
-    "c5b5e75d-ec3c-4c3e-ae4b-f75c26bb3fad": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "Hey, I just said that!",
-      "next": "e84bf888-7c3e-486b-ba08-ffec5db0de7e",
-      "_id": "c5b5e75d-ec3c-4c3e-ae4b-f75c26bb3fad"
+      "next": 55,
+      "_id": 54
     },
-    "e84bf888-7c3e-486b-ba08-ffec5db0de7e": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "When you play...",
-      "next": "5e281253-54e7-4166-a03d-31824d957d85",
-      "_id": "e84bf888-7c3e-486b-ba08-ffec5db0de7e"
+      "next": 56,
+      "_id": 55
     },
-    "5e281253-54e7-4166-a03d-31824d957d85": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Choose your words wisely.",
-      "next": "9acfadce-1aee-4d29-82c2-b1152e37ebf1",
-      "_id": "5e281253-54e7-4166-a03d-31824d957d85"
+      "next": 57,
+      "_id": 56
     },
-    "9acfadce-1aee-4d29-82c2-b1152e37ebf1": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Every character will remember everything you say. Or don't say.",
-      "next": "ed06beca-4c5d-4138-b1da-109a2836417e",
-      "_id": "9acfadce-1aee-4d29-82c2-b1152e37ebf1"
+      "next": 58,
+      "_id": 57
     },
-    "ed06beca-4c5d-4138-b1da-109a2836417e": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "Yeah. You even brought up my choices in this MAIN MENU.",
-      "next": "74ced991-1418-4122-bf46-4a23fd69c5cd",
-      "_id": "ed06beca-4c5d-4138-b1da-109a2836417e"
+      "next": 59,
+      "_id": 58
     },
-    "74ced991-1418-4122-bf46-4a23fd69c5cd": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Exactly.",
-      "next": "6e0e9927-9ac1-4625-ada6-97e0b4c5b184",
-      "_id": "74ced991-1418-4122-bf46-4a23fd69c5cd"
+      "next": 60,
+      "_id": 59
     },
-    "6e0e9927-9ac1-4625-ada6-97e0b4c5b184": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": ". . .",
-      "next": "a137a8c0-17ed-40bf-98eb-41a2cd8d1a67",
-      "_id": "6e0e9927-9ac1-4625-ada6-97e0b4c5b184"
+      "next": 61,
+      "_id": 60
     },
-    "a137a8c0-17ed-40bf-98eb-41a2cd8d1a67": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Some things are hard not to remember.",
-      "next": "8eb7b76a-b763-4223-b5e8-289ca05af99f",
-      "_id": "a137a8c0-17ed-40bf-98eb-41a2cd8d1a67"
+      "next": 62,
+      "_id": 61
     },
-    "8eb7b76a-b763-4223-b5e8-289ca05af99f": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "END!",
       "next": null,
-      "_id": "8eb7b76a-b763-4223-b5e8-289ca05af99f"
+      "_id": 62
     },
-    "0ea5786d-d03d-4e05-a7f7-49207aba25d4": {
+    {
       "type": "expression",
       "exp": {
         "type": "operator",
@@ -972,66 +972,66 @@
         "left": {
           "type": "identifier",
           "val": "main-menu-convo-2",
-          "_id": "b8e165e0-28c1-4c6b-a120-3818e8aa2be6"
+          "_id": 65
         },
         "right": {
           "type": "number",
           "val": 2,
-          "_id": "83bb8d25-28b1-4572-b3d1-8daeb348b344"
+          "_id": 66
         },
-        "_id": "65a45858-0552-454d-a675-a70b2476c0fa"
+        "_id": 64
       },
-      "_id": "0ea5786d-d03d-4e05-a7f7-49207aba25d4"
+      "_id": 63
     },
-    "65a45858-0552-454d-a675-a70b2476c0fa": {
+    {
       "type": "operator",
       "op": "==",
       "left": {
         "type": "identifier",
         "val": "main-menu-convo-2",
-        "_id": "b8e165e0-28c1-4c6b-a120-3818e8aa2be6"
+        "_id": 65
       },
       "right": {
         "type": "number",
         "val": 2,
-        "_id": "83bb8d25-28b1-4572-b3d1-8daeb348b344"
+        "_id": 66
       },
-      "_id": "65a45858-0552-454d-a675-a70b2476c0fa"
+      "_id": 64
     },
-    "b8e165e0-28c1-4c6b-a120-3818e8aa2be6": {
+    {
       "type": "identifier",
       "val": "main-menu-convo-2",
-      "_id": "b8e165e0-28c1-4c6b-a120-3818e8aa2be6"
+      "_id": 65
     },
-    "83bb8d25-28b1-4572-b3d1-8daeb348b344": {
+    {
       "type": "number",
       "val": 2,
-      "_id": "83bb8d25-28b1-4572-b3d1-8daeb348b344"
+      "_id": 66
     },
-    "884d2c2a-c5f3-40c5-94b8-a661bbb370da": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "And there are no right answers.",
-      "next": "c5b5e75d-ec3c-4c3e-ae4b-f75c26bb3fad",
-      "_id": "884d2c2a-c5f3-40c5-94b8-a661bbb370da"
+      "next": 54,
+      "_id": 67
     },
-    "c254aaf8-0c83-4f5d-9038-18b082935292": {
+    {
       "type": "expression",
       "exp": [],
-      "_id": "c254aaf8-0c83-4f5d-9038-18b082935292"
+      "_id": 68
     },
-    "b0a05a9e-5ae2-4b88-b9f4-df046971545b": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "And it's full of lies.",
-      "next": "c5b5e75d-ec3c-4c3e-ae4b-f75c26bb3fad",
-      "_id": "b0a05a9e-5ae2-4b88-b9f4-df046971545b"
+      "next": 54,
+      "_id": 69
     },
-    "c5f59e92-7566-4d29-a569-b3e390933d78": {
+    {
       "type": "expression",
       "exp": {
         "type": "operator",
@@ -1039,235 +1039,235 @@
         "left": {
           "type": "identifier",
           "val": "main-menu-convo-1",
-          "_id": "98bf2b7c-2215-458d-b784-32023c7ecb79"
+          "_id": 72
         },
         "right": {
           "type": "number",
           "val": 2,
-          "_id": "a3c13ba5-fae3-47ef-895c-9db00eee608c"
+          "_id": 73
         },
-        "_id": "b435e978-d08a-435e-a245-7f1288ade0a3"
+        "_id": 71
       },
-      "_id": "c5f59e92-7566-4d29-a569-b3e390933d78"
+      "_id": 70
     },
-    "b435e978-d08a-435e-a245-7f1288ade0a3": {
+    {
       "type": "operator",
       "op": "==",
       "left": {
         "type": "identifier",
         "val": "main-menu-convo-1",
-        "_id": "98bf2b7c-2215-458d-b784-32023c7ecb79"
+        "_id": 72
       },
       "right": {
         "type": "number",
         "val": 2,
-        "_id": "a3c13ba5-fae3-47ef-895c-9db00eee608c"
+        "_id": 73
       },
-      "_id": "b435e978-d08a-435e-a245-7f1288ade0a3"
+      "_id": 71
     },
-    "98bf2b7c-2215-458d-b784-32023c7ecb79": {
+    {
       "type": "identifier",
       "val": "main-menu-convo-1",
-      "_id": "98bf2b7c-2215-458d-b784-32023c7ecb79"
+      "_id": 72
     },
-    "a3c13ba5-fae3-47ef-895c-9db00eee608c": {
+    {
       "type": "number",
       "val": 2,
-      "_id": "a3c13ba5-fae3-47ef-895c-9db00eee608c"
+      "_id": 73
     },
-    "89d068df-0661-4793-8701-821321666cd1": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "This game is a coming-out, a coming-of-age, a coming-to-terms. ",
-      "next": "380d53c2-1699-442e-bbdb-ad59cbe5037f",
-      "_id": "89d068df-0661-4793-8701-821321666cd1"
+      "next": 48,
+      "_id": 74
     },
-    "b34eff28-5871-413f-8cbf-330afa7cdf78": {
+    {
       "type": "expression",
       "exp": [],
-      "_id": "b34eff28-5871-413f-8cbf-330afa7cdf78"
+      "_id": 75
     },
-    "2bb42f4e-3a85-450d-a01c-bbe50464aba6": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "This game ends not in blood, but in tears. ",
-      "next": "380d53c2-1699-442e-bbdb-ad59cbe5037f",
-      "_id": "2bb42f4e-3a85-450d-a01c-bbe50464aba6"
+      "next": 48,
+      "_id": 76
     },
-    "9b7a157d-804d-4712-b1f8-432e05a84582": {
+    {
       "type": "expression",
       "exp": [],
-      "_id": "9b7a157d-804d-4712-b1f8-432e05a84582"
+      "_id": 77
     },
-    "a13d3678-d576-4764-8361-a0b66d0bbfad": {
+    {
       "type": "continue",
-      "next": "2fa1e6c1-4dfe-4d76-bd7e-b052d9a84db3",
-      "_id": "a13d3678-d576-4764-8361-a0b66d0bbfad"
+      "next": 42,
+      "_id": 78
     },
-    "83d849b4-12ea-4f54-8349-07895c746659": {
+    {
       "type": "set",
       "variable": "main-menu-convo-2",
       "op": "=",
       "value": 1,
-      "next": "ffa7d297-f6a0-4634-8a0d-eeec298f0924",
-      "_id": "83d849b4-12ea-4f54-8349-07895c746659"
+      "next": 80,
+      "_id": 79
     },
-    "ffa7d297-f6a0-4634-8a0d-eeec298f0924": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "LIFE is a bit of a downer.",
-      "next": "fe2f4c10-fc79-4331-aedf-0755fcfbe379",
-      "_id": "ffa7d297-f6a0-4634-8a0d-eeec298f0924"
+      "next": 81,
+      "_id": 80
     },
-    "fe2f4c10-fc79-4331-aedf-0755fcfbe379": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "So that's a yes.",
-      "next": "b29615d0-04b8-466d-83b7-ff7b7f80c5b4",
-      "_id": "fe2f4c10-fc79-4331-aedf-0755fcfbe379"
+      "next": 36,
+      "_id": 81
     },
-    "13971547-bec5-44ef-9c75-90e469e505a0": {
+    {
       "type": "set",
       "variable": "main-menu-convo-2",
       "op": "=",
       "value": 3,
-      "next": "17ba2f84-6726-4d79-a137-5f073bc5a0eb",
-      "_id": "13971547-bec5-44ef-9c75-90e469e505a0"
+      "next": 83,
+      "_id": 82
     },
-    "17ba2f84-6726-4d79-a137-5f073bc5a0eb": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Even if the dialogue was 100% accurate, it'd still be 100% lies.",
-      "next": "dc520a5d-a4a9-4e1b-b426-4c4ba49a6b14",
-      "_id": "17ba2f84-6726-4d79-a137-5f073bc5a0eb"
+      "next": 84,
+      "_id": 83
     },
-    "dc520a5d-a4a9-4e1b-b426-4c4ba49a6b14": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": ". . .",
-      "next": "b29615d0-04b8-466d-83b7-ff7b7f80c5b4",
-      "_id": "dc520a5d-a4a9-4e1b-b426-4c4ba49a6b14"
+      "next": 36,
+      "_id": 84
     },
-    "0b252f78-fb84-4d5a-860b-9b3f5d8b24cc": {
+    {
       "type": "expression",
       "exp": [],
-      "_id": "0b252f78-fb84-4d5a-860b-9b3f5d8b24cc"
+      "_id": 85
     },
-    "114dd92f-f2ac-45ed-a97b-28f5718f93be": {
+    {
       "type": "continue",
-      "next": "1d718e91-f86c-4b35-bd14-dd161e751a46",
-      "_id": "114dd92f-f2ac-45ed-a97b-28f5718f93be"
+      "next": 28,
+      "_id": 86
     },
-    "d208c040-4ab0-49de-a39c-94452712c244": {
+    {
       "type": "set",
       "variable": "main-menu-convo-1",
       "op": "=",
       "value": 2,
-      "next": "f85eccca-90cc-4ce9-b93e-ff84337a8327",
-      "_id": "d208c040-4ab0-49de-a39c-94452712c244"
+      "next": 88,
+      "_id": 87
     },
-    "f85eccca-90cc-4ce9-b93e-ff84337a8327": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Hey, I'm coding on this laptop. Turning my coming-of-age story into the game you're playing right now.",
-      "next": "02cd7fdb-b0d6-433e-9beb-b2e37c12deb9",
-      "_id": "f85eccca-90cc-4ce9-b93e-ff84337a8327"
+      "next": 89,
+      "_id": 88
     },
-    "02cd7fdb-b0d6-433e-9beb-b2e37c12deb9": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "Naw, you're probably procrastinating.",
-      "next": "1aeabae1-e284-45fa-848a-e617afabdc29",
-      "_id": "02cd7fdb-b0d6-433e-9beb-b2e37c12deb9"
+      "next": 90,
+      "_id": 89
     },
-    "1aeabae1-e284-45fa-848a-e617afabdc29": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Look who's talking.",
-      "next": "a9074f77-99fe-4f75-90a0-eabf8d077529",
-      "_id": "1aeabae1-e284-45fa-848a-e617afabdc29"
+      "next": 91,
+      "_id": 90
     },
-    "a9074f77-99fe-4f75-90a0-eabf8d077529": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "Touché, douché.",
-      "next": "b1186dac-9d16-4d55-8cf3-4a9dc6f38195",
-      "_id": "a9074f77-99fe-4f75-90a0-eabf8d077529"
+      "next": 92,
+      "_id": 91
     },
-    "b1186dac-9d16-4d55-8cf3-4a9dc6f38195": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Anyway...",
-      "next": "a12ccf1f-ac48-41f6-a357-e107d25dfbd1",
-      "_id": "b1186dac-9d16-4d55-8cf3-4a9dc6f38195"
+      "next": 23,
+      "_id": 92
     },
-    "101516f0-3cad-4907-9510-e8de6540d8fb": {
+    {
       "type": "set",
       "variable": "main-menu-convo-1",
       "op": "=",
       "value": 2,
-      "next": "77c71c4c-a2f4-4c2a-a006-8cff08850a86",
-      "_id": "101516f0-3cad-4907-9510-e8de6540d8fb"
+      "next": 94,
+      "_id": 93
     },
-    "77c71c4c-a2f4-4c2a-a006-8cff08850a86": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Uh, compared to that, I guess my story isn't that tragic.",
-      "next": "3d995617-7e12-41e0-8deb-15d2d1714fb5",
-      "_id": "77c71c4c-a2f4-4c2a-a006-8cff08850a86"
+      "next": 95,
+      "_id": 94
     },
-    "3d995617-7e12-41e0-8deb-15d2d1714fb5": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Although that's kind of a glass one-hundredths-full interpretation.",
-      "next": "adc376bf-8480-4470-8781-1bccc8c9b528",
-      "_id": "3d995617-7e12-41e0-8deb-15d2d1714fb5"
+      "next": 96,
+      "_id": 95
     },
-    "adc376bf-8480-4470-8781-1bccc8c9b528": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "blooooood.",
-      "next": "e93b7781-7c24-4333-87cc-2dc32de5c19e",
-      "_id": "adc376bf-8480-4470-8781-1bccc8c9b528"
+      "next": 97,
+      "_id": 96
     },
-    "e93b7781-7c24-4333-87cc-2dc32de5c19e": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Anyway...",
-      "next": "a12ccf1f-ac48-41f6-a357-e107d25dfbd1",
-      "_id": "e93b7781-7c24-4333-87cc-2dc32de5c19e"
+      "next": 23,
+      "_id": 97
     },
-    "55bafe7b-9363-46a0-bc44-c814f1b3c280": {
+    {
       "type": "expression",
       "exp": {
         "type": "operator",
@@ -1275,70 +1275,70 @@
         "left": {
           "type": "identifier",
           "val": "asked-about",
-          "_id": "5455f738-4b82-4c43-9399-3a361910c559"
+          "_id": 100
         },
         "right": {
           "type": "identifier",
           "val": "asked-credits",
-          "_id": "33f5a44c-6930-4097-93f6-b108b88a864c"
+          "_id": 101
         },
-        "_id": "7975f2ed-285c-43f9-a6f7-26ddeb3c6121"
+        "_id": 99
       },
-      "_id": "55bafe7b-9363-46a0-bc44-c814f1b3c280"
+      "_id": 98
     },
-    "7975f2ed-285c-43f9-a6f7-26ddeb3c6121": {
+    {
       "type": "operator",
       "op": "&",
       "left": {
         "type": "identifier",
         "val": "asked-about",
-        "_id": "5455f738-4b82-4c43-9399-3a361910c559"
+        "_id": 100
       },
       "right": {
         "type": "identifier",
         "val": "asked-credits",
-        "_id": "33f5a44c-6930-4097-93f6-b108b88a864c"
+        "_id": 101
       },
-      "_id": "7975f2ed-285c-43f9-a6f7-26ddeb3c6121"
+      "_id": 99
     },
-    "5455f738-4b82-4c43-9399-3a361910c559": {
+    {
       "type": "identifier",
       "val": "asked-about",
-      "_id": "5455f738-4b82-4c43-9399-3a361910c559"
+      "_id": 100
     },
-    "33f5a44c-6930-4097-93f6-b108b88a864c": {
+    {
       "type": "identifier",
       "val": "asked-credits",
-      "_id": "33f5a44c-6930-4097-93f6-b108b88a864c"
+      "_id": 101
     },
-    "193502e6-b31f-470d-a09f-fa3921f603c9": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": ". . .",
-      "next": "38706ad6-99a7-4dde-bb25-daf730445305",
-      "_id": "193502e6-b31f-470d-a09f-fa3921f603c9"
+      "next": 103,
+      "_id": 102
     },
-    "38706ad6-99a7-4dde-bb25-daf730445305": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "Why did you make that a clickable option, when it was the only option left.",
-      "next": "fe45dc9d-114c-4404-bbe4-ac85cedf4322",
-      "_id": "38706ad6-99a7-4dde-bb25-daf730445305"
+      "next": 104,
+      "_id": 103
     },
-    "fe45dc9d-114c-4404-bbe4-ac85cedf4322": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "NO IDEA",
-      "next": "0c3dc6ef-d60a-4823-b76c-9724e2da157d",
-      "_id": "fe45dc9d-114c-4404-bbe4-ac85cedf4322"
+      "next": 14,
+      "_id": 104
     },
-    "57480ff6-73af-45d1-83c2-67f32f258bbc": {
+    {
       "type": "expression",
       "exp": {
         "type": "operator",
@@ -1346,96 +1346,96 @@
         "left": {
           "type": "identifier",
           "val": "asked-about",
-          "_id": "f3aa16d2-02ab-47b5-929f-5a4be56cd95b"
+          "_id": 107
         },
         "right": {
           "type": "identifier",
           "val": "asked-credits",
-          "_id": "aa7a65c6-442d-413d-90b5-e8922bfd3891"
+          "_id": 108
         },
-        "_id": "e82d306e-2038-41a0-a18b-750925af0180"
+        "_id": 106
       },
-      "_id": "57480ff6-73af-45d1-83c2-67f32f258bbc"
+      "_id": 105
     },
-    "e82d306e-2038-41a0-a18b-750925af0180": {
+    {
       "type": "operator",
       "op": "|",
       "left": {
         "type": "identifier",
         "val": "asked-about",
-        "_id": "f3aa16d2-02ab-47b5-929f-5a4be56cd95b"
+        "_id": 107
       },
       "right": {
         "type": "identifier",
         "val": "asked-credits",
-        "_id": "aa7a65c6-442d-413d-90b5-e8922bfd3891"
+        "_id": 108
       },
-      "_id": "e82d306e-2038-41a0-a18b-750925af0180"
+      "_id": 106
     },
-    "f3aa16d2-02ab-47b5-929f-5a4be56cd95b": {
+    {
       "type": "identifier",
       "val": "asked-about",
-      "_id": "f3aa16d2-02ab-47b5-929f-5a4be56cd95b"
+      "_id": 107
     },
-    "aa7a65c6-442d-413d-90b5-e8922bfd3891": {
+    {
       "type": "identifier",
       "val": "asked-credits",
-      "_id": "aa7a65c6-442d-413d-90b5-e8922bfd3891"
+      "_id": 108
     },
-    "514e64e2-f4ae-4bff-ac14-34103791153c": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Yes, let's!",
-      "next": "0c3dc6ef-d60a-4823-b76c-9724e2da157d",
-      "_id": "514e64e2-f4ae-4bff-ac14-34103791153c"
+      "next": 14,
+      "_id": 109
     },
-    "3d0e78c6-fa33-4134-86d4-172b81bc3248": {
+    {
       "type": "set",
       "op": "=",
       "value": true,
       "variable": "asked-credits",
-      "next": "1988eb01-dd3c-4e26-a382-d996e3b05adf",
-      "_id": "3d0e78c6-fa33-4134-86d4-172b81bc3248"
+      "next": 111,
+      "_id": 110
     },
-    "1988eb01-dd3c-4e26-a382-d996e3b05adf": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Ah, how rude of me! Let me introduce myself.",
-      "next": "3e305851-2e1a-40ae-882d-9794be427e64",
-      "_id": "1988eb01-dd3c-4e26-a382-d996e3b05adf"
+      "next": 112,
+      "_id": 111
     },
-    "3e305851-2e1a-40ae-882d-9794be427e64": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Hi, I'm Nicky Case.",
-      "next": "7f774225-0a81-4174-9412-6ff93b8b10ce",
-      "_id": "3e305851-2e1a-40ae-882d-9794be427e64"
+      "next": 113,
+      "_id": 112
     },
-    "7f774225-0a81-4174-9412-6ff93b8b10ce": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "That's not my legal name, it's just my REAL name.",
-      "next": "08f0a128-d3d3-4be0-bbad-b01db7653a22",
-      "_id": "7f774225-0a81-4174-9412-6ff93b8b10ce"
+      "next": 114,
+      "_id": 113
     },
-    "08f0a128-d3d3-4be0-bbad-b01db7653a22": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "That's totes weird, dude.",
-      "next": "ff167f4d-3878-4fbf-a093-a41a87071c14",
-      "_id": "08f0a128-d3d3-4be0-bbad-b01db7653a22"
+      "next": 115,
+      "_id": 114
     },
-    "ff167f4d-3878-4fbf-a093-a41a87071c14": {
+    {
       "type": "branch",
       "branches": [
         {
@@ -1445,9 +1445,9 @@
               "exp": {
                 "type": "identifier",
                 "val": "asked-about",
-                "_id": "4231901d-fb7c-4f18-810d-09c99696ecaf"
+                "_id": 117
               },
-              "_id": "a963db62-4023-4d65-bc5d-a09d132a50ab"
+              "_id": 116
             },
             "is": true
           },
@@ -1457,8 +1457,8 @@
               "name": "Player"
             },
             "content": "And like you just told me, this is your personal story?",
-            "next": "041b5e74-846b-4389-b1d6-45c118531a45",
-            "_id": "11d364be-1b3f-4cf9-b3f6-e1d4b0e0c863"
+            "next": 119,
+            "_id": 118
           }
         },
         {
@@ -1466,7 +1466,7 @@
             "expression": {
               "type": "expression",
               "exp": [],
-              "_id": "7799af96-8f01-4e21-bc7f-50d4e7719762"
+              "_id": 171
             },
             "is": {
               "default": true
@@ -1478,47 +1478,47 @@
               "name": "Player"
             },
             "content": "And you made this game?",
-            "next": "041b5e74-846b-4389-b1d6-45c118531a45",
-            "_id": "73410cd7-4244-4ce1-818e-ae45b0701e32"
+            "next": 119,
+            "_id": 172
           }
         }
       ],
-      "next": "041b5e74-846b-4389-b1d6-45c118531a45",
-      "_id": "ff167f4d-3878-4fbf-a093-a41a87071c14"
+      "next": 119,
+      "_id": 115
     },
-    "a963db62-4023-4d65-bc5d-a09d132a50ab": {
+    {
       "type": "expression",
       "exp": {
         "type": "identifier",
         "val": "asked-about",
-        "_id": "4231901d-fb7c-4f18-810d-09c99696ecaf"
+        "_id": 117
       },
-      "_id": "a963db62-4023-4d65-bc5d-a09d132a50ab"
+      "_id": 116
     },
-    "4231901d-fb7c-4f18-810d-09c99696ecaf": {
+    {
       "type": "identifier",
       "val": "asked-about",
-      "_id": "4231901d-fb7c-4f18-810d-09c99696ecaf"
+      "_id": 117
     },
-    "11d364be-1b3f-4cf9-b3f6-e1d4b0e0c863": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "And like you just told me, this is your personal story?",
-      "next": "041b5e74-846b-4389-b1d6-45c118531a45",
-      "_id": "11d364be-1b3f-4cf9-b3f6-e1d4b0e0c863"
+      "next": 119,
+      "_id": 118
     },
-    "041b5e74-846b-4389-b1d6-45c118531a45": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Yep, I am the sole writer / programmer / artist of Coming Out Simulator.",
-      "next": "83b50164-2c88-444c-971c-ec49aeda75c8",
-      "_id": "041b5e74-846b-4389-b1d6-45c118531a45"
+      "next": 120,
+      "_id": 119
     },
-    "83b50164-2c88-444c-971c-ec49aeda75c8": {
+    {
       "type": "branch",
       "branches": [
         {
@@ -1528,9 +1528,9 @@
               "exp": {
                 "type": "identifier",
                 "val": "asked-about",
-                "_id": "126a7d81-33fb-403d-aef6-428b74078304"
+                "_id": 122
               },
-              "_id": "d0b122f7-3947-4279-a9ec-4216d16920f8"
+              "_id": 121
             },
             "is": true
           },
@@ -1540,8 +1540,8 @@
               "name": "Player"
             },
             "content": "All of this yourself?",
-            "next": "55bb1bd2-2999-49ce-a47d-9425d4f39d62",
-            "_id": "8682c8eb-1b9c-4ae1-a02f-e3672b56ec0c"
+            "next": 124,
+            "_id": 123
           }
         },
         {
@@ -1549,7 +1549,7 @@
             "expression": {
               "type": "expression",
               "exp": [],
-              "_id": "f05b33b2-9c0d-49f5-929d-4c30d3d7ca4f"
+              "_id": 169
             },
             "is": {
               "default": true
@@ -1561,92 +1561,92 @@
               "name": "N"
             },
             "content": "The sounds & audio, though, are from various public domain sources.",
-            "next": "fe2efca8-03bf-43e9-9aa8-a7a8de1b555c",
-            "_id": "c92f1789-a59c-4830-8290-c3d59e8baa10"
+            "next": 128,
+            "_id": 170
           }
         }
       ],
-      "next": "fe2efca8-03bf-43e9-9aa8-a7a8de1b555c",
-      "_id": "83b50164-2c88-444c-971c-ec49aeda75c8"
+      "next": 128,
+      "_id": 120
     },
-    "d0b122f7-3947-4279-a9ec-4216d16920f8": {
+    {
       "type": "expression",
       "exp": {
         "type": "identifier",
         "val": "asked-about",
-        "_id": "126a7d81-33fb-403d-aef6-428b74078304"
+        "_id": 122
       },
-      "_id": "d0b122f7-3947-4279-a9ec-4216d16920f8"
+      "_id": 121
     },
-    "126a7d81-33fb-403d-aef6-428b74078304": {
+    {
       "type": "identifier",
       "val": "asked-about",
-      "_id": "126a7d81-33fb-403d-aef6-428b74078304"
+      "_id": 122
     },
-    "8682c8eb-1b9c-4ae1-a02f-e3672b56ec0c": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "All of this yourself?",
-      "next": "55bb1bd2-2999-49ce-a47d-9425d4f39d62",
-      "_id": "8682c8eb-1b9c-4ae1-a02f-e3672b56ec0c"
+      "next": 124,
+      "_id": 123
     },
-    "55bb1bd2-2999-49ce-a47d-9425d4f39d62": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "I said it before and I'll say it again...",
-      "next": "77f692b5-33b7-4e1a-b2ff-feb88ff447f9",
-      "_id": "55bb1bd2-2999-49ce-a47d-9425d4f39d62"
+      "next": 125,
+      "_id": 124
     },
-    "77f692b5-33b7-4e1a-b2ff-feb88ff447f9": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "Of course. You narcissist.",
-      "next": "15b0a230-b3b9-4417-af97-8a2db335b19c",
-      "_id": "77f692b5-33b7-4e1a-b2ff-feb88ff447f9"
+      "next": 126,
+      "_id": 125
     },
-    "15b0a230-b3b9-4417-af97-8a2db335b19c": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Well it's not ALL me.",
-      "next": "6f93aca4-6ca9-40a0-87cf-b730a43b8ea3",
-      "_id": "15b0a230-b3b9-4417-af97-8a2db335b19c"
+      "next": 127,
+      "_id": 126
     },
-    "6f93aca4-6ca9-40a0-87cf-b730a43b8ea3": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "The sounds & audio are from various public domain sources.",
-      "next": "fe2efca8-03bf-43e9-9aa8-a7a8de1b555c",
-      "_id": "6f93aca4-6ca9-40a0-87cf-b730a43b8ea3"
+      "next": 128,
+      "_id": 127
     },
-    "fe2efca8-03bf-43e9-9aa8-a7a8de1b555c": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "But although it's mostly just me behind this game...",
-      "next": "8c73c499-d415-4380-b267-28e85fba3cc3",
-      "_id": "fe2efca8-03bf-43e9-9aa8-a7a8de1b555c"
+      "next": 129,
+      "_id": 128
     },
-    "8c73c499-d415-4380-b267-28e85fba3cc3": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "...there's a lot of people behind this game's story.",
-      "next": "6ea8ea2c-c181-427b-ae56-d8cc70e826a8",
-      "_id": "8c73c499-d415-4380-b267-28e85fba3cc3"
+      "next": 130,
+      "_id": 129
     },
-    "6ea8ea2c-c181-427b-ae56-d8cc70e826a8": {
+    {
       "type": "branch",
       "branches": [
         {
@@ -1656,9 +1656,9 @@
               "exp": {
                 "type": "identifier",
                 "val": "asked-about",
-                "_id": "cfaf4000-bf68-4f23-bdc2-686956606595"
+                "_id": 132
               },
-              "_id": "1496d492-992f-4d1c-959a-1ece2869dfc0"
+              "_id": 131
             },
             "is": true
           },
@@ -1670,11 +1670,11 @@
             "choices": [
               {
                 "content": "Speaking of which, let's play that! Now! ",
-                "next": "49a29c99-0611-4c95-8c4f-77bec93eea8c"
+                "next": 5
               }
             ],
             "next": null,
-            "_id": "4284081b-2949-4d69-9d7e-207b1601ddec"
+            "_id": 133
           }
         },
         {
@@ -1682,7 +1682,7 @@
             "expression": {
               "type": "expression",
               "exp": [],
-              "_id": "e56b5953-bbe6-4dfc-b355-c79b140d9bc5"
+              "_id": 134
             },
             "is": {
               "default": true
@@ -1696,36 +1696,36 @@
             "choices": [
               {
                 "content": "Speaking of that, can we play it now? ",
-                "next": "49a29c99-0611-4c95-8c4f-77bec93eea8c"
+                "next": 5
               },
               {
                 "content": "Why'd you make this? (About This Game) ",
-                "next": "b1501090-349b-47c4-9bbf-19763e2256c0"
+                "next": 136
               }
             ],
             "next": null,
-            "_id": "895a59e3-cd0a-46ba-863b-73f4aa946d7b"
+            "_id": 135
           }
         }
       ],
       "next": null,
-      "_id": "6ea8ea2c-c181-427b-ae56-d8cc70e826a8"
+      "_id": 130
     },
-    "1496d492-992f-4d1c-959a-1ece2869dfc0": {
+    {
       "type": "expression",
       "exp": {
         "type": "identifier",
         "val": "asked-about",
-        "_id": "cfaf4000-bf68-4f23-bdc2-686956606595"
+        "_id": 132
       },
-      "_id": "1496d492-992f-4d1c-959a-1ece2869dfc0"
+      "_id": 131
     },
-    "cfaf4000-bf68-4f23-bdc2-686956606595": {
+    {
       "type": "identifier",
       "val": "asked-about",
-      "_id": "cfaf4000-bf68-4f23-bdc2-686956606595"
+      "_id": 132
     },
-    "4284081b-2949-4d69-9d7e-207b1601ddec": {
+    {
       "type": "choice",
       "name": {
         "name": "Player"
@@ -1733,18 +1733,18 @@
       "choices": [
         {
           "content": "Speaking of which, let's play that! Now! ",
-          "next": "49a29c99-0611-4c95-8c4f-77bec93eea8c"
+          "next": 5
         }
       ],
       "next": null,
-      "_id": "4284081b-2949-4d69-9d7e-207b1601ddec"
+      "_id": 133
     },
-    "e56b5953-bbe6-4dfc-b355-c79b140d9bc5": {
+    {
       "type": "expression",
       "exp": [],
-      "_id": "e56b5953-bbe6-4dfc-b355-c79b140d9bc5"
+      "_id": 134
     },
-    "895a59e3-cd0a-46ba-863b-73f4aa946d7b": {
+    {
       "type": "choice",
       "name": {
         "name": "Player"
@@ -1752,25 +1752,25 @@
       "choices": [
         {
           "content": "Speaking of that, can we play it now? ",
-          "next": "49a29c99-0611-4c95-8c4f-77bec93eea8c"
+          "next": 5
         },
         {
           "content": "Why'd you make this? (About This Game) ",
-          "next": "b1501090-349b-47c4-9bbf-19763e2256c0"
+          "next": 136
         }
       ],
       "next": null,
-      "_id": "895a59e3-cd0a-46ba-863b-73f4aa946d7b"
+      "_id": 135
     },
-    "b1501090-349b-47c4-9bbf-19763e2256c0": {
+    {
       "type": "set",
       "op": "=",
       "value": true,
       "variable": "asked-about",
-      "next": "91a30533-b85d-45ea-ba1d-25499ecd5fe1",
-      "_id": "b1501090-349b-47c4-9bbf-19763e2256c0"
+      "next": 137,
+      "_id": 136
     },
-    "91a30533-b85d-45ea-ba1d-25499ecd5fe1": {
+    {
       "type": "branch",
       "branches": [
         {
@@ -1780,9 +1780,9 @@
               "exp": {
                 "type": "identifier",
                 "val": "asked-credits",
-                "_id": "e5388d7a-996a-4a09-807e-4c5f1edc4a07"
+                "_id": 139
               },
-              "_id": "7c2ec57d-d82b-4c76-9828-ea2a1fd3091b"
+              "_id": 138
             },
             "is": true
           },
@@ -1792,8 +1792,8 @@
               "name": "N"
             },
             "content": "I wanted to tell my story.",
-            "next": "b327e04f-7ed6-405c-a32d-e643a82eaeec",
-            "_id": "b3e41a16-82cd-4611-acdb-cd8df5e91ba6"
+            "next": 141,
+            "_id": 140
           }
         },
         {
@@ -1801,7 +1801,7 @@
             "expression": {
               "type": "expression",
               "exp": [],
-              "_id": "db50ecd6-cb90-43d2-8c39-d74030b84e34"
+              "_id": 165
             },
             "is": {
               "default": true
@@ -1813,56 +1813,56 @@
               "name": "N"
             },
             "content": "This game...",
-            "next": "3c475d5c-ef2e-4345-b3eb-35904a5b6488",
-            "_id": "b922e00a-8562-47ae-bbcb-baae82bcccec"
+            "next": 167,
+            "_id": 166
           }
         }
       ],
-      "next": "b327e04f-7ed6-405c-a32d-e643a82eaeec",
-      "_id": "91a30533-b85d-45ea-ba1d-25499ecd5fe1"
+      "next": 141,
+      "_id": 137
     },
-    "7c2ec57d-d82b-4c76-9828-ea2a1fd3091b": {
+    {
       "type": "expression",
       "exp": {
         "type": "identifier",
         "val": "asked-credits",
-        "_id": "e5388d7a-996a-4a09-807e-4c5f1edc4a07"
+        "_id": 139
       },
-      "_id": "7c2ec57d-d82b-4c76-9828-ea2a1fd3091b"
+      "_id": 138
     },
-    "e5388d7a-996a-4a09-807e-4c5f1edc4a07": {
+    {
       "type": "identifier",
       "val": "asked-credits",
-      "_id": "e5388d7a-996a-4a09-807e-4c5f1edc4a07"
+      "_id": 139
     },
-    "b3e41a16-82cd-4611-acdb-cd8df5e91ba6": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "I wanted to tell my story.",
-      "next": "b327e04f-7ed6-405c-a32d-e643a82eaeec",
-      "_id": "b3e41a16-82cd-4611-acdb-cd8df5e91ba6"
+      "next": 141,
+      "_id": 140
     },
-    "b327e04f-7ed6-405c-a32d-e643a82eaeec": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "Of course. You narcissist.",
-      "next": "9c575910-d2b4-4355-b67f-0377b9d92f81",
-      "_id": "b327e04f-7ed6-405c-a32d-e643a82eaeec"
+      "next": 142,
+      "_id": 141
     },
-    "9c575910-d2b4-4355-b67f-0377b9d92f81": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Ha, of course.",
-      "next": "fac05013-8479-45f6-8ac1-9ce300321383",
-      "_id": "9c575910-d2b4-4355-b67f-0377b9d92f81"
+      "next": 143,
+      "_id": 142
     },
-    "fac05013-8479-45f6-8ac1-9ce300321383": {
+    {
       "type": "branch",
       "branches": [
         {
@@ -1872,9 +1872,9 @@
               "exp": {
                 "type": "identifier",
                 "val": "asked-credits",
-                "_id": "eb6c6270-ed41-481e-9c1a-6f96d6de4140"
+                "_id": 145
               },
-              "_id": "9764c023-34d3-4d78-9485-ff04cb20aee4"
+              "_id": 144
             },
             "is": true
           },
@@ -1884,8 +1884,8 @@
               "name": "P"
             },
             "content": "Actually no, a narcissist would use their real name.",
-            "next": "3be90bf1-8a82-4b0b-8b9f-802b3837ad00",
-            "_id": "2accef5f-ec17-4dc1-963a-b7b7a0f714f0"
+            "next": 147,
+            "_id": 146
           }
         },
         {
@@ -1893,7 +1893,7 @@
             "expression": {
               "type": "expression",
               "exp": [],
-              "_id": "8129d53e-452a-4ebe-a719-e8755cebcc54"
+              "_id": 163
             },
             "is": {
               "default": true
@@ -1901,128 +1901,128 @@
           },
           "next": {
             "type": "continue",
-            "next": "08d734cd-c5bc-4269-a87c-0206343880c0",
-            "_id": "48f97ffd-1bed-4cb7-9696-0070730ab594"
+            "next": 149,
+            "_id": 164
           }
         }
       ],
-      "next": "08d734cd-c5bc-4269-a87c-0206343880c0",
-      "_id": "fac05013-8479-45f6-8ac1-9ce300321383"
+      "next": 149,
+      "_id": 143
     },
-    "9764c023-34d3-4d78-9485-ff04cb20aee4": {
+    {
       "type": "expression",
       "exp": {
         "type": "identifier",
         "val": "asked-credits",
-        "_id": "eb6c6270-ed41-481e-9c1a-6f96d6de4140"
+        "_id": 145
       },
-      "_id": "9764c023-34d3-4d78-9485-ff04cb20aee4"
+      "_id": 144
     },
-    "eb6c6270-ed41-481e-9c1a-6f96d6de4140": {
+    {
       "type": "identifier",
       "val": "asked-credits",
-      "_id": "eb6c6270-ed41-481e-9c1a-6f96d6de4140"
+      "_id": 145
     },
-    "2accef5f-ec17-4dc1-963a-b7b7a0f714f0": {
+    {
       "type": "line",
       "name": {
         "name": "P"
       },
       "content": "Actually no, a narcissist would use their real name.",
-      "next": "3be90bf1-8a82-4b0b-8b9f-802b3837ad00",
-      "_id": "2accef5f-ec17-4dc1-963a-b7b7a0f714f0"
+      "next": 147,
+      "_id": 146
     },
-    "3be90bf1-8a82-4b0b-8b9f-802b3837ad00": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "I told you, it IS my real na--",
-      "next": "50b849d2-7d28-474a-aff1-3e1586d1f0fe",
-      "_id": "3be90bf1-8a82-4b0b-8b9f-802b3837ad00"
+      "next": 148,
+      "_id": 147
     },
-    "50b849d2-7d28-474a-aff1-3e1586d1f0fe": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "Aight, aight. Weirdo.",
-      "next": "08d734cd-c5bc-4269-a87c-0206343880c0",
-      "_id": "50b849d2-7d28-474a-aff1-3e1586d1f0fe"
+      "next": 149,
+      "_id": 148
     },
-    "08d734cd-c5bc-4269-a87c-0206343880c0": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "I made this game for the #Nar8 Game Jam. Gave me an excuse. And a deadline!",
-      "next": "16e6d595-eae7-4246-80f4-424db3a31b3e",
-      "_id": "08d734cd-c5bc-4269-a87c-0206343880c0"
+      "next": 150,
+      "_id": 149
     },
-    "16e6d595-eae7-4246-80f4-424db3a31b3e": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "You procrastinated until the last day to enter, didn't you.",
-      "next": "7a40ac9c-2be4-4c12-92fe-ac49d9f5560d",
-      "_id": "16e6d595-eae7-4246-80f4-424db3a31b3e"
+      "next": 151,
+      "_id": 150
     },
-    "7a40ac9c-2be4-4c12-92fe-ac49d9f5560d": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Yes.",
-      "next": "c7e05953-a2c3-4d1b-a38b-c7c4853de5b9",
-      "_id": "7a40ac9c-2be4-4c12-92fe-ac49d9f5560d"
+      "next": 152,
+      "_id": 151
     },
-    "c7e05953-a2c3-4d1b-a38b-c7c4853de5b9": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Also! This game is uncopyrighted. Dedicated to the public domain.",
-      "next": "3db76374-21af-4204-93f7-0fb66700f3ef",
-      "_id": "c7e05953-a2c3-4d1b-a38b-c7c4853de5b9"
+      "next": 153,
+      "_id": 152
     },
-    "3db76374-21af-4204-93f7-0fb66700f3ef": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "I'm as open with my source code as I am with my sexuality.",
-      "next": "216de785-74ad-4020-976e-6dacfe5270e6",
-      "_id": "3db76374-21af-4204-93f7-0fb66700f3ef"
+      "next": 154,
+      "_id": 153
     },
-    "216de785-74ad-4020-976e-6dacfe5270e6": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "Ugh, that's a terrible pun.",
-      "next": "e310a3e4-770d-45d4-b6fb-edc8c6e57fac",
-      "_id": "216de785-74ad-4020-976e-6dacfe5270e6"
+      "next": 155,
+      "_id": 154
     },
-    "e310a3e4-770d-45d4-b6fb-edc8c6e57fac": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "Howzabout a 'Fork Me' programming pun?",
-      "next": "0e7d14b3-d5d2-496b-b344-a29e1e3c0b94",
-      "_id": "e310a3e4-770d-45d4-b6fb-edc8c6e57fac"
+      "next": 156,
+      "_id": 155
     },
-    "0e7d14b3-d5d2-496b-b344-a29e1e3c0b94": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "noooooo.",
-      "next": "988474c6-b556-4158-9f25-7a65702fc623",
-      "_id": "0e7d14b3-d5d2-496b-b344-a29e1e3c0b94"
+      "next": 157,
+      "_id": 156
     },
-    "988474c6-b556-4158-9f25-7a65702fc623": {
+    {
       "type": "branch",
       "branches": [
         {
@@ -2032,9 +2032,9 @@
               "exp": {
                 "type": "identifier",
                 "val": "asked-credits",
-                "_id": "6316154e-1cd3-4559-9882-fb4e23d30ea2"
+                "_id": 159
               },
-              "_id": "371a69ce-99e6-4399-96f5-e100cd93df99"
+              "_id": 158
             },
             "is": true
           },
@@ -2046,11 +2046,11 @@
             "choices": [
               {
                 "content": "Let's just play this game already. ",
-                "next": "49a29c99-0611-4c95-8c4f-77bec93eea8c"
+                "next": 5
               }
             ],
             "next": null,
-            "_id": "bab49722-2242-4888-8959-6e74f0e3d9ee"
+            "_id": 160
           }
         },
         {
@@ -2058,7 +2058,7 @@
             "expression": {
               "type": "expression",
               "exp": [],
-              "_id": "5106ee22-7a70-4182-8778-330a13ef8dce"
+              "_id": 161
             },
             "is": {
               "default": true
@@ -2072,36 +2072,36 @@
             "choices": [
               {
                 "content": "Bad puns aside, can we play now? ",
-                "next": "49a29c99-0611-4c95-8c4f-77bec93eea8c"
+                "next": 5
               },
               {
                 "content": "So who ARE you? (About Me) ",
-                "next": "3d0e78c6-fa33-4134-86d4-172b81bc3248"
+                "next": 110
               }
             ],
             "next": null,
-            "_id": "9bd9ceb4-7414-4bd6-a8d6-7fb25fca3c15"
+            "_id": 162
           }
         }
       ],
       "next": null,
-      "_id": "988474c6-b556-4158-9f25-7a65702fc623"
+      "_id": 157
     },
-    "371a69ce-99e6-4399-96f5-e100cd93df99": {
+    {
       "type": "expression",
       "exp": {
         "type": "identifier",
         "val": "asked-credits",
-        "_id": "6316154e-1cd3-4559-9882-fb4e23d30ea2"
+        "_id": 159
       },
-      "_id": "371a69ce-99e6-4399-96f5-e100cd93df99"
+      "_id": 158
     },
-    "6316154e-1cd3-4559-9882-fb4e23d30ea2": {
+    {
       "type": "identifier",
       "val": "asked-credits",
-      "_id": "6316154e-1cd3-4559-9882-fb4e23d30ea2"
+      "_id": 159
     },
-    "bab49722-2242-4888-8959-6e74f0e3d9ee": {
+    {
       "type": "choice",
       "name": {
         "name": "Player"
@@ -2109,18 +2109,18 @@
       "choices": [
         {
           "content": "Let's just play this game already. ",
-          "next": "49a29c99-0611-4c95-8c4f-77bec93eea8c"
+          "next": 5
         }
       ],
       "next": null,
-      "_id": "bab49722-2242-4888-8959-6e74f0e3d9ee"
+      "_id": 160
     },
-    "5106ee22-7a70-4182-8778-330a13ef8dce": {
+    {
       "type": "expression",
       "exp": [],
-      "_id": "5106ee22-7a70-4182-8778-330a13ef8dce"
+      "_id": 161
     },
-    "9bd9ceb4-7414-4bd6-a8d6-7fb25fca3c15": {
+    {
       "type": "choice",
       "name": {
         "name": "Player"
@@ -2128,85 +2128,85 @@
       "choices": [
         {
           "content": "Bad puns aside, can we play now? ",
-          "next": "49a29c99-0611-4c95-8c4f-77bec93eea8c"
+          "next": 5
         },
         {
           "content": "So who ARE you? (About Me) ",
-          "next": "3d0e78c6-fa33-4134-86d4-172b81bc3248"
+          "next": 110
         }
       ],
       "next": null,
-      "_id": "9bd9ceb4-7414-4bd6-a8d6-7fb25fca3c15"
+      "_id": 162
     },
-    "8129d53e-452a-4ebe-a719-e8755cebcc54": {
+    {
       "type": "expression",
       "exp": [],
-      "_id": "8129d53e-452a-4ebe-a719-e8755cebcc54"
+      "_id": 163
     },
-    "48f97ffd-1bed-4cb7-9696-0070730ab594": {
+    {
       "type": "continue",
-      "next": "08d734cd-c5bc-4269-a87c-0206343880c0",
-      "_id": "48f97ffd-1bed-4cb7-9696-0070730ab594"
+      "next": 149,
+      "_id": 164
     },
-    "db50ecd6-cb90-43d2-8c39-d74030b84e34": {
+    {
       "type": "expression",
       "exp": [],
-      "_id": "db50ecd6-cb90-43d2-8c39-d74030b84e34"
+      "_id": 165
     },
-    "b922e00a-8562-47ae-bbcb-baae82bcccec": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "This game...",
-      "next": "3c475d5c-ef2e-4345-b3eb-35904a5b6488",
-      "_id": "b922e00a-8562-47ae-bbcb-baae82bcccec"
+      "next": 167,
+      "_id": 166
     },
-    "3c475d5c-ef2e-4345-b3eb-35904a5b6488": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "...more like a conversation simulator, really...",
-      "next": "c87a54b4-5e91-44b1-b259-57e9dd1d8c57",
-      "_id": "3c475d5c-ef2e-4345-b3eb-35904a5b6488"
+      "next": 168,
+      "_id": 167
     },
-    "c87a54b4-5e91-44b1-b259-57e9dd1d8c57": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "...is a very personal story.",
-      "next": "b327e04f-7ed6-405c-a32d-e643a82eaeec",
-      "_id": "c87a54b4-5e91-44b1-b259-57e9dd1d8c57"
+      "next": 141,
+      "_id": 168
     },
-    "f05b33b2-9c0d-49f5-929d-4c30d3d7ca4f": {
+    {
       "type": "expression",
       "exp": [],
-      "_id": "f05b33b2-9c0d-49f5-929d-4c30d3d7ca4f"
+      "_id": 169
     },
-    "c92f1789-a59c-4830-8290-c3d59e8baa10": {
+    {
       "type": "line",
       "name": {
         "name": "N"
       },
       "content": "The sounds & audio, though, are from various public domain sources.",
-      "next": "fe2efca8-03bf-43e9-9aa8-a7a8de1b555c",
-      "_id": "c92f1789-a59c-4830-8290-c3d59e8baa10"
+      "next": 128,
+      "_id": 170
     },
-    "7799af96-8f01-4e21-bc7f-50d4e7719762": {
+    {
       "type": "expression",
       "exp": [],
-      "_id": "7799af96-8f01-4e21-bc7f-50d4e7719762"
+      "_id": 171
     },
-    "73410cd7-4244-4ce1-818e-ae45b0701e32": {
+    {
       "type": "line",
       "name": {
         "name": "Player"
       },
       "content": "And you made this game?",
-      "next": "041b5e74-846b-4389-b1d6-45c118531a45",
-      "_id": "73410cd7-4244-4ce1-818e-ae45b0701e32"
+      "next": 119,
+      "_id": 172
     }
-  }
+  ]
 }
