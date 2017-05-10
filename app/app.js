@@ -48,6 +48,7 @@ $('.btn').on('click', function(e) {
 $('.button-new').on('click', function() {newFile();});
 $('.button-open').on('click', function() {openFile();});
 $('.button-save').on('click', function() {saveFile();});
+$('.button-export').on('click', function() {exportFile();});
 $('.button-run').on('click', function() {runScript();});
 $('.button-stop').on('click', function() {clearRunner();});
 
@@ -123,7 +124,7 @@ function saveFile(as) {
 function exportFile() {
   var file = dialog.showSaveDialog(browserWindow, {
     title: 'Export',
-    filters: [{ name: 'JSON', extensions: ['json', 'js'] }]
+    filters: [{ name: 'JSON', extensions: ['json'] }]
   });
 
   if (!file) return;
@@ -135,7 +136,8 @@ function exportFile() {
     return;
   }
 
-  fs.writeFileSync(file, JSON.stringify(astUtils.flatten(astUtils.prepare(ast))), {encoding: 'utf-8'});
+  var exportData = astUtils.flatten(astUtils.prepare(ast));
+  fs.writeFileSync(file, JSON.stringify(exportData, null, 2), {encoding: 'utf-8'});
 }
 
 function runScript() {

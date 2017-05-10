@@ -1,0 +1,659 @@
+{
+  "start": "5d8921a1-dcad-4ba0-aff4-6ac535f03cc5",
+  "nodes": {
+    "5d8921a1-dcad-4ba0-aff4-6ac535f03cc5": {
+      "type": "line",
+      "name": {
+        "name": "Lao"
+      },
+      "content": "Pink pantaloons! You should be more careful... this would have never happened in my day. You could have flown on your gentleman puffin... or coded your way across, or even just walked around! But no, you had to fling yourself off a ledge…",
+      "next": "9a737bd8-da0a-49b6-b394-b6cc46a402ba",
+      "_id": "5d8921a1-dcad-4ba0-aff4-6ac535f03cc5"
+    },
+    "9a737bd8-da0a-49b6-b394-b6cc46a402ba": {
+      "type": "line",
+      "name": {
+        "name": "Arca"
+      },
+      "content": "Thanks for saving me! My name is Arca.",
+      "next": "ca0a845d-6d9c-4012-9ab8-7e9d34925b6e",
+      "_id": "9a737bd8-da0a-49b6-b394-b6cc46a402ba"
+    },
+    "ca0a845d-6d9c-4012-9ab8-7e9d34925b6e": {
+      "type": "choice",
+      "name": {
+        "name": "Arca"
+      },
+      "choices": [
+        {
+          "content": "Who are you? ",
+          "next": "e97662ed-37dd-412d-8a3b-cf4d256bb38a"
+        },
+        {
+          "content": "What's this code thing? ",
+          "next": "497dee28-bdae-4e7a-864f-7611b2a346c2"
+        },
+        {
+          "content": "I don't have a gentleman puffin...",
+          "next": "0a1e3d59-9d10-4a5d-89a9-7c41adc50aca"
+        }
+      ],
+      "next": null,
+      "_id": "ca0a845d-6d9c-4012-9ab8-7e9d34925b6e"
+    },
+    "e97662ed-37dd-412d-8a3b-cf4d256bb38a": {
+      "type": "note",
+      "contents": "In this section, Lao and Ada explain who they are",
+      "next": "68915a53-4406-4e1e-a873-73f0d3cc15d0",
+      "_id": "e97662ed-37dd-412d-8a3b-cf4d256bb38a"
+    },
+    "68915a53-4406-4e1e-a873-73f0d3cc15d0": {
+      "type": "set",
+      "op": "=",
+      "value": true,
+      "variable": "asked-who",
+      "next": "2a2dfb4d-6512-4bfc-8ff6-0fc07d00f16e",
+      "_id": "68915a53-4406-4e1e-a873-73f0d3cc15d0"
+    },
+    "2a2dfb4d-6512-4bfc-8ff6-0fc07d00f16e": {
+      "type": "line",
+      "name": {
+        "name": "Lao"
+      },
+      "content": "I am Lao - the Oracle. I am one of the few creatures left who practices the ancient art of coding. This is my apprentice, Ada.",
+      "next": "add64b31-03b8-4286-841e-6373918eb5eb",
+      "_id": "2a2dfb4d-6512-4bfc-8ff6-0fc07d00f16e"
+    },
+    "add64b31-03b8-4286-841e-6373918eb5eb": {
+      "type": "line",
+      "name": {
+        "name": "Ada"
+      },
+      "content": "Hey",
+      "next": "1966518b-505b-4f11-8fdf-5ebccab7a27b",
+      "_id": "add64b31-03b8-4286-841e-6373918eb5eb"
+    },
+    "1966518b-505b-4f11-8fdf-5ebccab7a27b": {
+      "type": "go",
+      "next": "5dd01e69-d3ee-4591-828b-66c95fa7b526",
+      "_id": "1966518b-505b-4f11-8fdf-5ebccab7a27b"
+    },
+    "5dd01e69-d3ee-4591-828b-66c95fa7b526": {
+      "type": "choice",
+      "name": {
+        "name": "Arca"
+      },
+      "choices": [
+        {
+          "content": "So what's this code thing? ",
+          "next": "497dee28-bdae-4e7a-864f-7611b2a346c2"
+        },
+        {
+          "content": "What's an Oracle? ",
+          "next": "be797388-741f-4371-9d7e-e19f9b57874a",
+          "condition": {
+            "expression": {
+              "type": "expression",
+              "exp": {
+                "type": "identifier",
+                "val": "asked-oracle",
+                "_id": "e98388c5-a656-4844-915d-9015aa14c2bf"
+              },
+              "_id": "132a39b8-43bc-49cf-a0e6-8b68ca1014c7"
+            },
+            "is": false
+          }
+        },
+        {
+          "content": "Are you a figment of my imagination? ",
+          "next": "cdf3d11a-7c58-485c-baa9-9619eac711b9",
+          "condition": {
+            "expression": {
+              "type": "expression",
+              "exp": {
+                "type": "identifier",
+                "val": "asked-imagination",
+                "_id": "e6202ef5-af58-4735-8411-d70e17af3ad0"
+              },
+              "_id": "0f1f9f24-4f87-4de3-bede-0740d0a59ca0"
+            },
+            "is": false
+          }
+        }
+      ],
+      "next": null,
+      "_id": "5dd01e69-d3ee-4591-828b-66c95fa7b526"
+    },
+    "497dee28-bdae-4e7a-864f-7611b2a346c2": {
+      "type": "line",
+      "name": {
+        "name": "Lao"
+      },
+      "content": "Bah! Youngsters these days... Everything in the internet universe is made with code. It gives you the power to change our world and create anything you can imagine. In ancient times, every internet creature could code - but now it has been forgotten.",
+      "next": "f1cad696-fe67-454e-a6c4-f16dd26b324d",
+      "_id": "497dee28-bdae-4e7a-864f-7611b2a346c2"
+    },
+    "f1cad696-fe67-454e-a6c4-f16dd26b324d": {
+      "type": "choice",
+      "name": {
+        "name": "Arca"
+      },
+      "choices": [
+        {
+          "content": "Could I learn to code?",
+          "next": "c7b3251d-e0f1-4b0f-8a63-fc525b27e47f"
+        },
+        {
+          "content": "Coding sounds really difficult...",
+          "next": "0add1864-ea21-41df-8730-05ce7edc5d6f"
+        },
+        {
+          "content": "Boring! I'd rather have a gentleman puffin",
+          "next": "4fcc857f-52b1-47a2-81b7-20c524361f7d"
+        }
+      ],
+      "next": "5398a41c-6c98-4825-a931-11bdacb73c73",
+      "_id": "f1cad696-fe67-454e-a6c4-f16dd26b324d"
+    },
+    "c7b3251d-e0f1-4b0f-8a63-fc525b27e47f": {
+      "type": "set",
+      "variable": "arca.code-opinion",
+      "op": "=",
+      "value": "eager",
+      "next": "fc096d0d-0416-449b-aca1-bda9d4f17728",
+      "_id": "c7b3251d-e0f1-4b0f-8a63-fc525b27e47f"
+    },
+    "fc096d0d-0416-449b-aca1-bda9d4f17728": {
+      "type": "line",
+      "name": {
+        "name": "Lao"
+      },
+      "content": "Hmm... I doubt it.",
+      "next": "5398a41c-6c98-4825-a931-11bdacb73c73",
+      "_id": "fc096d0d-0416-449b-aca1-bda9d4f17728"
+    },
+    "5398a41c-6c98-4825-a931-11bdacb73c73": {
+      "type": "line",
+      "name": {
+        "name": "Lao"
+      },
+      "content": "Tremendous focus is required! You must feel the code in everything around you.",
+      "next": "232ca8ee-1d91-4421-847a-f86ebddd2526",
+      "_id": "5398a41c-6c98-4825-a931-11bdacb73c73"
+    },
+    "232ca8ee-1d91-4421-847a-f86ebddd2526": {
+      "type": "exec",
+      "js": "editPrompt()",
+      "next": "b03cbfbb-fa71-4e1f-bb2d-633f0b1a7323",
+      "_id": "232ca8ee-1d91-4421-847a-f86ebddd2526"
+    },
+    "b03cbfbb-fa71-4e1f-bb2d-633f0b1a7323": {
+      "type": "line",
+      "name": {
+        "name": "Lao"
+      },
+      "content": "One step at a time, without letting anxiety cloud progress. Deep down in our consciousness, we need to ponder the eternal question - am I the egg, or are you the egg? Do eggs really exist? You probably wouldn’t understand. The Great Gastropod of 1992 said ‘If you chase two molluscs, one will escape’ He was right, unless you happen to be a two headed electric eel.",
+      "next": "602c5ae3-d0f8-4d70-894a-5f2fa8458e2f",
+      "_id": "b03cbfbb-fa71-4e1f-bb2d-633f0b1a7323"
+    },
+    "602c5ae3-d0f8-4d70-894a-5f2fa8458e2f": {
+      "type": "branch",
+      "branches": [
+        {
+          "condition": {
+            "expression": {
+              "type": "expression",
+              "exp": {
+                "type": "operator",
+                "op": "==",
+                "left": {
+                  "type": "identifier",
+                  "val": "arca.code-opinion",
+                  "_id": "29366f35-9200-4eda-aeed-291e00db6c7c"
+                },
+                "right": {
+                  "type": "string",
+                  "val": "eager",
+                  "_id": "993d10c5-688b-40ff-b3d0-b8dc01b24bc6"
+                },
+                "_id": "82721479-e133-40ce-869c-d8ab39b6d43a"
+              },
+              "_id": "ee0dfe88-f6f4-45db-9ef7-a14da3785ccf"
+            },
+            "is": true
+          },
+          "next": {
+            "type": "line",
+            "name": {
+              "name": "Lao"
+            },
+            "content": "You're eager to code",
+            "next": null,
+            "_id": "a6a7c323-b8e7-467d-b93a-e5c16e8577cd"
+          }
+        },
+        {
+          "condition": {
+            "expression": {
+              "type": "expression",
+              "exp": {
+                "type": "operator",
+                "op": "==",
+                "left": {
+                  "type": "identifier",
+                  "val": "arca.code-opinion",
+                  "_id": "66578b15-af53-46ef-95c7-cd74e0f59223"
+                },
+                "right": {
+                  "type": "string",
+                  "val": "difficult",
+                  "_id": "95c9dd12-59f7-4dd1-9f2b-3625433ab4ba"
+                },
+                "_id": "41458ced-f672-4120-854b-c9ab6724a274"
+              },
+              "_id": "e77d5fe8-dca9-4a13-b6c5-535601ed3c89"
+            },
+            "is": true
+          },
+          "next": {
+            "type": "line",
+            "name": {
+              "name": "Lao"
+            },
+            "content": "You think code is difficult",
+            "next": null,
+            "_id": "f0e21048-e7b1-46bf-9adf-f7af6271e1c2"
+          }
+        },
+        {
+          "condition": {
+            "expression": {
+              "type": "expression",
+              "exp": {
+                "type": "operator",
+                "op": "==",
+                "left": {
+                  "type": "identifier",
+                  "val": "arca.code-opinion",
+                  "_id": "64a2b602-e8d1-475d-beb2-1ae7ab70f300"
+                },
+                "right": {
+                  "type": "string",
+                  "val": "boring",
+                  "_id": "8e3069af-61d4-4b25-9f17-dc8944179eea"
+                },
+                "_id": "d51385e6-8921-4941-9e3f-65d42ae31ac1"
+              },
+              "_id": "de29684b-7da6-4930-b9b0-115928a2296b"
+            },
+            "is": true
+          },
+          "next": {
+            "type": "line",
+            "name": {
+              "name": "Lao"
+            },
+            "content": "Code isn't boring!",
+            "next": null,
+            "_id": "24400cc6-1cf1-4860-9983-fe57f55d906a"
+          }
+        },
+        {
+          "condition": {
+            "expression": {
+              "type": "expression",
+              "exp": [],
+              "_id": "0a7235bc-007d-4473-b5a8-fa315ba2eafa"
+            },
+            "is": {
+              "default": true
+            }
+          },
+          "next": {
+            "type": "line",
+            "name": {
+              "name": "Lao"
+            },
+            "content": "No-one cares what you think of code",
+            "next": null,
+            "_id": "38fa1c31-1400-4c45-b9e4-9606b6d1c426"
+          }
+        }
+      ],
+      "next": null,
+      "_id": "602c5ae3-d0f8-4d70-894a-5f2fa8458e2f"
+    },
+    "ee0dfe88-f6f4-45db-9ef7-a14da3785ccf": {
+      "type": "expression",
+      "exp": {
+        "type": "operator",
+        "op": "==",
+        "left": {
+          "type": "identifier",
+          "val": "arca.code-opinion",
+          "_id": "29366f35-9200-4eda-aeed-291e00db6c7c"
+        },
+        "right": {
+          "type": "string",
+          "val": "eager",
+          "_id": "993d10c5-688b-40ff-b3d0-b8dc01b24bc6"
+        },
+        "_id": "82721479-e133-40ce-869c-d8ab39b6d43a"
+      },
+      "_id": "ee0dfe88-f6f4-45db-9ef7-a14da3785ccf"
+    },
+    "82721479-e133-40ce-869c-d8ab39b6d43a": {
+      "type": "operator",
+      "op": "==",
+      "left": {
+        "type": "identifier",
+        "val": "arca.code-opinion",
+        "_id": "29366f35-9200-4eda-aeed-291e00db6c7c"
+      },
+      "right": {
+        "type": "string",
+        "val": "eager",
+        "_id": "993d10c5-688b-40ff-b3d0-b8dc01b24bc6"
+      },
+      "_id": "82721479-e133-40ce-869c-d8ab39b6d43a"
+    },
+    "29366f35-9200-4eda-aeed-291e00db6c7c": {
+      "type": "identifier",
+      "val": "arca.code-opinion",
+      "_id": "29366f35-9200-4eda-aeed-291e00db6c7c"
+    },
+    "993d10c5-688b-40ff-b3d0-b8dc01b24bc6": {
+      "type": "string",
+      "val": "eager",
+      "_id": "993d10c5-688b-40ff-b3d0-b8dc01b24bc6"
+    },
+    "a6a7c323-b8e7-467d-b93a-e5c16e8577cd": {
+      "type": "line",
+      "name": {
+        "name": "Lao"
+      },
+      "content": "You're eager to code",
+      "next": null,
+      "_id": "a6a7c323-b8e7-467d-b93a-e5c16e8577cd"
+    },
+    "e77d5fe8-dca9-4a13-b6c5-535601ed3c89": {
+      "type": "expression",
+      "exp": {
+        "type": "operator",
+        "op": "==",
+        "left": {
+          "type": "identifier",
+          "val": "arca.code-opinion",
+          "_id": "66578b15-af53-46ef-95c7-cd74e0f59223"
+        },
+        "right": {
+          "type": "string",
+          "val": "difficult",
+          "_id": "95c9dd12-59f7-4dd1-9f2b-3625433ab4ba"
+        },
+        "_id": "41458ced-f672-4120-854b-c9ab6724a274"
+      },
+      "_id": "e77d5fe8-dca9-4a13-b6c5-535601ed3c89"
+    },
+    "41458ced-f672-4120-854b-c9ab6724a274": {
+      "type": "operator",
+      "op": "==",
+      "left": {
+        "type": "identifier",
+        "val": "arca.code-opinion",
+        "_id": "66578b15-af53-46ef-95c7-cd74e0f59223"
+      },
+      "right": {
+        "type": "string",
+        "val": "difficult",
+        "_id": "95c9dd12-59f7-4dd1-9f2b-3625433ab4ba"
+      },
+      "_id": "41458ced-f672-4120-854b-c9ab6724a274"
+    },
+    "66578b15-af53-46ef-95c7-cd74e0f59223": {
+      "type": "identifier",
+      "val": "arca.code-opinion",
+      "_id": "66578b15-af53-46ef-95c7-cd74e0f59223"
+    },
+    "95c9dd12-59f7-4dd1-9f2b-3625433ab4ba": {
+      "type": "string",
+      "val": "difficult",
+      "_id": "95c9dd12-59f7-4dd1-9f2b-3625433ab4ba"
+    },
+    "f0e21048-e7b1-46bf-9adf-f7af6271e1c2": {
+      "type": "line",
+      "name": {
+        "name": "Lao"
+      },
+      "content": "You think code is difficult",
+      "next": null,
+      "_id": "f0e21048-e7b1-46bf-9adf-f7af6271e1c2"
+    },
+    "de29684b-7da6-4930-b9b0-115928a2296b": {
+      "type": "expression",
+      "exp": {
+        "type": "operator",
+        "op": "==",
+        "left": {
+          "type": "identifier",
+          "val": "arca.code-opinion",
+          "_id": "64a2b602-e8d1-475d-beb2-1ae7ab70f300"
+        },
+        "right": {
+          "type": "string",
+          "val": "boring",
+          "_id": "8e3069af-61d4-4b25-9f17-dc8944179eea"
+        },
+        "_id": "d51385e6-8921-4941-9e3f-65d42ae31ac1"
+      },
+      "_id": "de29684b-7da6-4930-b9b0-115928a2296b"
+    },
+    "d51385e6-8921-4941-9e3f-65d42ae31ac1": {
+      "type": "operator",
+      "op": "==",
+      "left": {
+        "type": "identifier",
+        "val": "arca.code-opinion",
+        "_id": "64a2b602-e8d1-475d-beb2-1ae7ab70f300"
+      },
+      "right": {
+        "type": "string",
+        "val": "boring",
+        "_id": "8e3069af-61d4-4b25-9f17-dc8944179eea"
+      },
+      "_id": "d51385e6-8921-4941-9e3f-65d42ae31ac1"
+    },
+    "64a2b602-e8d1-475d-beb2-1ae7ab70f300": {
+      "type": "identifier",
+      "val": "arca.code-opinion",
+      "_id": "64a2b602-e8d1-475d-beb2-1ae7ab70f300"
+    },
+    "8e3069af-61d4-4b25-9f17-dc8944179eea": {
+      "type": "string",
+      "val": "boring",
+      "_id": "8e3069af-61d4-4b25-9f17-dc8944179eea"
+    },
+    "24400cc6-1cf1-4860-9983-fe57f55d906a": {
+      "type": "line",
+      "name": {
+        "name": "Lao"
+      },
+      "content": "Code isn't boring!",
+      "next": null,
+      "_id": "24400cc6-1cf1-4860-9983-fe57f55d906a"
+    },
+    "0a7235bc-007d-4473-b5a8-fa315ba2eafa": {
+      "type": "expression",
+      "exp": [],
+      "_id": "0a7235bc-007d-4473-b5a8-fa315ba2eafa"
+    },
+    "38fa1c31-1400-4c45-b9e4-9606b6d1c426": {
+      "type": "line",
+      "name": {
+        "name": "Lao"
+      },
+      "content": "No-one cares what you think of code",
+      "next": null,
+      "_id": "38fa1c31-1400-4c45-b9e4-9606b6d1c426"
+    },
+    "0add1864-ea21-41df-8730-05ce7edc5d6f": {
+      "type": "set",
+      "variable": "arca.code-opinion",
+      "op": "=",
+      "value": "difficult",
+      "next": "5e77509f-ff93-4368-acb7-e12a80f5bb04",
+      "_id": "0add1864-ea21-41df-8730-05ce7edc5d6f"
+    },
+    "5e77509f-ff93-4368-acb7-e12a80f5bb04": {
+      "type": "line",
+      "name": {
+        "name": "Lao"
+      },
+      "content": "It is easier than you think! However...",
+      "next": "5398a41c-6c98-4825-a931-11bdacb73c73",
+      "_id": "5e77509f-ff93-4368-acb7-e12a80f5bb04"
+    },
+    "4fcc857f-52b1-47a2-81b7-20c524361f7d": {
+      "type": "set",
+      "variable": "arca.code-opinion",
+      "op": "=",
+      "value": "boring",
+      "next": "082f2735-1c44-456a-9f78-a315c3076107",
+      "_id": "4fcc857f-52b1-47a2-81b7-20c524361f7d"
+    },
+    "082f2735-1c44-456a-9f78-a315c3076107": {
+      "type": "line",
+      "name": {
+        "name": "Lao"
+      },
+      "content": "If you think being able to create anything you want is boring... Hmph! Absolute nonsense.",
+      "next": "5398a41c-6c98-4825-a931-11bdacb73c73",
+      "_id": "082f2735-1c44-456a-9f78-a315c3076107"
+    },
+    "be797388-741f-4371-9d7e-e19f9b57874a": {
+      "type": "set",
+      "op": "=",
+      "value": true,
+      "variable": "asked-oracle",
+      "next": "30fdfb08-fa63-4f25-9c29-4800175e6848",
+      "_id": "be797388-741f-4371-9d7e-e19f9b57874a"
+    },
+    "30fdfb08-fa63-4f25-9c29-4800175e6848": {
+      "type": "line",
+      "name": {
+        "name": "Ada"
+      },
+      "content": "Oracles are ancient dinosaur eggs that never hatched",
+      "next": "857d319e-0e12-4e17-a436-6847067c8be4",
+      "_id": "30fdfb08-fa63-4f25-9c29-4800175e6848"
+    },
+    "857d319e-0e12-4e17-a436-6847067c8be4": {
+      "type": "line",
+      "name": {
+        "name": "Lao"
+      },
+      "content": "Ada! That isn't true. An oracle is one who regularly skinny-dips in the sea of wisdom.",
+      "next": "adefe8c2-3392-4d5e-ba7e-02ba5d0474c8",
+      "_id": "857d319e-0e12-4e17-a436-6847067c8be4"
+    },
+    "adefe8c2-3392-4d5e-ba7e-02ba5d0474c8": {
+      "type": "go",
+      "next": "5dd01e69-d3ee-4591-828b-66c95fa7b526",
+      "_id": "adefe8c2-3392-4d5e-ba7e-02ba5d0474c8"
+    },
+    "132a39b8-43bc-49cf-a0e6-8b68ca1014c7": {
+      "type": "expression",
+      "exp": {
+        "type": "identifier",
+        "val": "asked-oracle",
+        "_id": "e98388c5-a656-4844-915d-9015aa14c2bf"
+      },
+      "_id": "132a39b8-43bc-49cf-a0e6-8b68ca1014c7"
+    },
+    "e98388c5-a656-4844-915d-9015aa14c2bf": {
+      "type": "identifier",
+      "val": "asked-oracle",
+      "_id": "e98388c5-a656-4844-915d-9015aa14c2bf"
+    },
+    "cdf3d11a-7c58-485c-baa9-9619eac711b9": {
+      "type": "set",
+      "op": "=",
+      "value": true,
+      "variable": "asked-imagination",
+      "next": "3ee36557-0f6c-4d20-9351-664659341721",
+      "_id": "cdf3d11a-7c58-485c-baa9-9619eac711b9"
+    },
+    "3ee36557-0f6c-4d20-9351-664659341721": {
+      "type": "line",
+      "name": {
+        "name": "Lao"
+      },
+      "content": "Fascinating question my dear vegan sausage. Some say we are all figments of the Internewt's imagination. But I've met him - he really isn't that creative.",
+      "next": "c289c7b4-d288-445f-ae67-2a6dbfdb47f7",
+      "_id": "3ee36557-0f6c-4d20-9351-664659341721"
+    },
+    "c289c7b4-d288-445f-ae67-2a6dbfdb47f7": {
+      "type": "go",
+      "next": "5dd01e69-d3ee-4591-828b-66c95fa7b526",
+      "_id": "c289c7b4-d288-445f-ae67-2a6dbfdb47f7"
+    },
+    "0f1f9f24-4f87-4de3-bede-0740d0a59ca0": {
+      "type": "expression",
+      "exp": {
+        "type": "identifier",
+        "val": "asked-imagination",
+        "_id": "e6202ef5-af58-4735-8411-d70e17af3ad0"
+      },
+      "_id": "0f1f9f24-4f87-4de3-bede-0740d0a59ca0"
+    },
+    "e6202ef5-af58-4735-8411-d70e17af3ad0": {
+      "type": "identifier",
+      "val": "asked-imagination",
+      "_id": "e6202ef5-af58-4735-8411-d70e17af3ad0"
+    },
+    "0a1e3d59-9d10-4a5d-89a9-7c41adc50aca": {
+      "type": "set",
+      "variable": "arca.wants-puffin",
+      "op": "=",
+      "value": true,
+      "next": "851648a2-3467-46e2-843f-3c95005fd348",
+      "_id": "0a1e3d59-9d10-4a5d-89a9-7c41adc50aca"
+    },
+    "851648a2-3467-46e2-843f-3c95005fd348": {
+      "type": "line",
+      "name": {
+        "name": "Lao"
+      },
+      "content": "Oh how preposterous! I don’t know what I would do without my dearest Cecil. Such a cute little munchkin...",
+      "next": "711c838b-8679-478b-8df2-469b993c94d3",
+      "_id": "851648a2-3467-46e2-843f-3c95005fd348"
+    },
+    "711c838b-8679-478b-8df2-469b993c94d3": {
+      "type": "line",
+      "name": {
+        "name": "Cecil"
+      },
+      "content": "Alright mate, that’s enough o’ that.",
+      "next": "a6eb04a3-b4af-47ff-a8a0-74078af79efe",
+      "_id": "711c838b-8679-478b-8df2-469b993c94d3"
+    },
+    "a6eb04a3-b4af-47ff-a8a0-74078af79efe": {
+      "type": "choice",
+      "name": {
+        "name": "Arca"
+      },
+      "choices": [
+        {
+          "content": "Who are you? ",
+          "next": "e97662ed-37dd-412d-8a3b-cf4d256bb38a"
+        },
+        {
+          "content": "What's this code thing? ",
+          "next": "497dee28-bdae-4e7a-864f-7611b2a346c2"
+        }
+      ],
+      "next": null,
+      "_id": "a6eb04a3-b4af-47ff-a8a0-74078af79efe"
+    }
+  }
+}

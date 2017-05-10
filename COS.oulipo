@@ -14,13 +14,13 @@ N: Hi, I'm Nicky Case.
 N: That's not my legal name, it's just my REAL name.
 Player: That's totes weird, dude.
 
-branch:
+branch
 	- (if asked-about) Player: And like you just told me, this is your personal story?
 	- (default) Player: And you made this game?
 
 N: Yep, I am the sole writer / programmer / artist of Coming Out Simulator.
 
-branch:
+branch
 	- (if asked-about) Player: All of this yourself?
 		Player: I said it before and I'll say it again...
 		Player: Of course. You narcissist.
@@ -31,7 +31,7 @@ branch:
 N: But although it's mostly just me behind this game...
 N: ...there's a lot of people behind this game's story.
 
-branch:
+branch
 	- (if asked-about) Player:
 		- Speaking of which, let's play that! Now! -> play
 	- (default) Player:
@@ -40,7 +40,7 @@ branch:
 		
 # about
 set asked-about
-branch:
+branch
 	- (if asked-credits) N: I wanted to tell my story.
 	- (default) N: This game...
 		N: ...more like a conversation simulator, really...
@@ -49,7 +49,7 @@ branch:
 Player: Of course. You narcissist.
 N: Ha, of course.
 
-branch:
+branch
 	- (if asked-credits) P: Actually no, a narcissist would use their real name.
 		N: I told you, it IS my real na--
 		Player: Aight, aight. Weirdo.
@@ -64,7 +64,7 @@ Player: Ugh, that's a terrible pun.
 N: Howzabout a 'Fork Me' programming pun?
 Player: noooooo.
 
-branch:
+branch
 	- (if asked-credits) Player:
 		- Let's just play this game already. -> play
 	- (default) Player:
@@ -72,7 +72,7 @@ branch:
 		- So who ARE you? (About Me) -> credits
 	
 # play
-branch:
+branch
 	- (unless asked-about or asked-credits) N: Jumping right into it! Great!
 			N: No messing around with reading the About Me or the About This Game sections or--
 			Player: Shush.
@@ -106,7 +106,7 @@ Player:
 		Player: blooooood.
 		N: Anyway...
 
-branch:
+branch
 	- (if asked-about) N: If you didn't skip the About This Game section, you'd know this is a very personal story.
 		Player: Shush.
 	- (default) continue
@@ -130,17 +130,17 @@ Player:
 		Player: '. . .'
 		
 N: You'll be playing as me, circa 2010.
-branch:
+branch
 	- (if asked-about) N: Because you skipped the About Me, my (not-yet-legal) name is Nicky Case. Just so you know.
 		Player: Shush.
 	- (default) continue
 	
-branch:
+branch
 	- (if main-menu-convo-1 is 1) N: This game doesn't end with gay unicorns.
 	- (if main-menu-convo-1 is 2) N: This game is a coming-out, a coming-of-age, a coming-to-terms. 
 	- (default) N: This game ends not in blood, but in tears. 
 	
-branch:
+branch
 	- (if main-menu-convo-2 is 1) N: Sorry for being a bit of a downer.
 	- (if main-menu-convo-2 is 2) N: And there are no right answers.
 	- (default) N: And it's full of lies.
